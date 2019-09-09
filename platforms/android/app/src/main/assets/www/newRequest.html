@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    
+    <title>SomDai</title>
+
+</head>
+
+<body
+    style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
+            <!-- Toggler/collapsibe Button -->
+            <a id="main" style="color: aliceblue">
+                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            </a>
+    
+            <!-- <h4 class="text-light ">SomDai</h4> -->
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="logo" style="width:40px;">
+            </a>
+    
+        </nav>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="col-8 ">
+                <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
+            </div>
+            <div class="col-16">
+                <div class="card" style="width: auto">
+                    <div class="card-body">
+                        <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
+    
+                    </div>
+                </div>
+            </div>
+            <a href="request.html">หน้าหลัก</a>
+            <a href="newRequest.html">แจ้งซ่อม</a>
+            <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="javascript:logout();">ออกจากระบบ</a>
+        </div>
+    <!-- <a name="" id="" class="btn btn-dark rounded-0 top-left mt-2" href="home.html" role="button"> กลับหน้าเมนู</a> -->
+    <div class="container ">
+        <div class="form-group pt-2">
+            <label for="exampleFormControlTextarea1">รายละเอียด/อาการชำรุด</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="row">
+                <p class="pr-3 pl-3"><img src="img/picture.png" alt="image" id="photo" style="width: 100% ;" /></p>
+                <p id="msg"></p>
+            <div class="col-4 text-right" style="padding-right:0"><img src="img/camera.png" width="50px"
+                    alt="Cinque Terre"></div>
+                    
+            <div class="col-8" style="padding-left: 0">
+                <a id="takePic" class="btn btn-primary" style="padding-top: 8px;"  role="button">Take picture</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        let program = {
+            init: function () {
+                document.getElementById('takePic').addEventListener('click', program.takephoto);
+            },
+            takephoto: function () {
+                let opts = {
+                    quality: 80,
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG,
+                    cameraDirection: Camera.Direction.BACK,
+                    targetWidth: 300,
+                    targetHeight: 400
+                };
+
+                navigator.camera.getPicture(program.ftw, program.wtf, opts);
+            },
+            ftw: function (imgURI) {
+                document.getElementById('msg').textContent = imgURI;
+                 document.getElementById('photo').src = imgURI;
+
+            },
+            wtf: function (msg) {
+                document.getElementById('msg').textContent = msg;
+            }
+        };
+
+        document.addEventListener('deviceready', program.init);
+    </script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
+</body>
+<script>
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+</html>
