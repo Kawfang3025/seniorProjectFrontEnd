@@ -4,97 +4,60 @@
 
 <head>
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
-    <!-- <meta http-equiv="Content-Security-Policy"
-        content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>SomDai</title>
-    <script type="text/javascript" src="js/index.js"></script>
 
     <script>
-        localStorage.setItem("IP", "192.168.1.55");
+         localStorage.setItem("IP", "192.168.1.55");
         var IP = localStorage.getItem("IP");
-        var cogniEmail = "somchai@hotmail.com"//localStorage.getItem("email");
-        // alert(cogniEmail);
-
+        window.onerror = function (msg, url, linenumber) {
+			alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+			return true;
+		}
         setTimeout(getData, 2000);
 
         function getData() {
-            var email;
-
-            if (cogniEmail == null) {
+           
+            var cogniEmail = localStorage.getItem("email");
+            if (cogniEmail === null) {
                 window.location.href = 'login.html';
             } else {
-                var url = "http://192.168.1.55:8080/technicains"
-                $.ajax({
-                    url: url,
-                    success: handleResult
-
-                }).fail(function (error) {
-                    alert('' + error.error);
-
-                    // alert(error);
-                })
-
-                function handleResult(result) {
-                    // $("#name").text("Copyright: " + result[1].repairingID);
-                    alert(result[1].e_mail);
-                    $.each(result, function (i, result) {
-                            alert(result.e_mail);
-                            if (cogniEmail === result.e_mail) {
-                                gohref();
-                            } 
-                    });
-
-                    function gohref(){
-                        window.location.href = 'request.html'
-                    }
-                    // for (let i = 0; i < result.lenght; i++) {
-                    //     if (cogniEmail === result[i].e_mail) {
-                    //         email[0] = result[i].e_mail;
-                    //         alert(email[0])
-                    //     } if (email[0] === cogniEmail) {
-                    //         alert("จะไปละน้า")
-                    //         window.location.href = 'request.html';
-
-                    //     }
-                    // }
-                }
-
-
-                /*var xmlhttp = new XMLHttpRequest();
-                var url = "http://" + IP + ":8080/technicains";
+                var xmlhttp = new XMLHttpRequest();
+                var url = "https://" + IP + ":8443/technicains";
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
-                var email = [];
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var output = xmlhttp.responseText;
                     var jsoutput = JSON.parse(output);
                     for (let i = 0; i < jsoutput.length; i++) {
                         if (cogniEmail === jsoutput[i].e_mail) {
-                            email[0] = jsoutput[i].e_mail;
+                            window.location.href = 'request.html';
                         }
                     }
                 }
-                if (email[0] === cogniEmail) {
-                    window.location.href = 'request.html';
-                } else {
-                    window.location.href = 'login.html';
-                }*/
+                var xmlhttp = new XMLHttpRequest();
+                var url1 = "https://" + IP + ":8443/employees";
+                xmlhttp.open("GET", url1, false);
+                xmlhttp.send();
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var output = xmlhttp.responseText;
+                    var jsoutput = JSON.parse(output);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        if (cogniEmail === jsoutput[i].e_mail) {
+                            window.location.href = 'request.html';
+                        }
+                    }
+                }
+
+                
             }
         }
     </script>
-     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
 <body>

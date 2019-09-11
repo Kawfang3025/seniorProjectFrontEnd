@@ -18,13 +18,17 @@
     style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
     <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
         <!-- Toggler/collapsibe Button -->
-        <a id="main" style="color: aliceblue">
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+            <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+            </label></span>
         </a>
 
         <!-- <h4 class="text-light ">SomDai</h4> -->
         <a class="navbar-brand" href="#">
-            <img src="img/logo.png" alt="logo" style="width:40px;">
+            <img src="img/logo.png" alt="logonav" style="width: 60px;">
         </a>
 
     </nav>
@@ -75,7 +79,7 @@
         yearlist();
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://" + IP + ":8080/repairing";
+            var url = "https://" + IP + ":8443/repairing";
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {

@@ -13,7 +13,7 @@ function openNav() {
   var ID = 0;
     var xmlhttp = new XMLHttpRequest();
     var email = localStorage.getItem("email");
-    var url1 = "http://"+IP+":8080/technicains";
+    var url1 = "https://"+IP+":8443/technicains";
     xmlhttp.open("GET", url1, false);
     xmlhttp.send();
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -28,7 +28,7 @@ function openNav() {
             }
         }
         if (ID === 0) {
-            url2 = "http://"+IP+":8080/employees";
+            url2 = "https://"+IP+":8443/employees";
             xmlhttp.open("GET", url2, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {

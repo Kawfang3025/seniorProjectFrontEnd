@@ -75,7 +75,7 @@
         yearlist();
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://" + IP + ":8080/repairing";
+            var url = "https://" + IP + ":8443/repairing";
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
