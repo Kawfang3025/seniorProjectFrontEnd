@@ -13,16 +13,16 @@
     <title>SomDai</title>
 
     <script>
-         localStorage.setItem("IP", "192.168.1.55");
+        localStorage.setItem("IP", "172.26.251.142");
         var IP = localStorage.getItem("IP");
         window.onerror = function (msg, url, linenumber) {
-			alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
-			return true;
-		}
+            alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+            return true;
+        }
         setTimeout(getData, 2000);
 
         function getData() {
-           
+
             var cogniEmail = localStorage.getItem("email");
             if (cogniEmail === null) {
                 window.location.href = 'login.html';
@@ -39,22 +39,21 @@
                             window.location.href = 'request.html';
                         }
                     }
-                }
-                var xmlhttp = new XMLHttpRequest();
-                var url1 = "https://" + IP + ":8443/employees";
-                xmlhttp.open("GET", url1, false);
-                xmlhttp.send();
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var output = xmlhttp.responseText;
-                    var jsoutput = JSON.parse(output);
-                    for (let i = 0; i < jsoutput.length; i++) {
-                        if (cogniEmail === jsoutput[i].e_mail) {
-                            window.location.href = 'request.html';
+                } else {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url1 = "https://" + IP + ":8443/employees";
+                    xmlhttp.open("GET", url1, false);
+                    xmlhttp.send();
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var output = xmlhttp.responseText;
+                        var jsoutput = JSON.parse(output);
+                        for (let i = 0; i < jsoutput.length; i++) {
+                            if (cogniEmail === jsoutput[i].e_mail) {
+                                window.location.href = 'request.html';
+                            }
                         }
                     }
                 }
-
-                
             }
         }
     </script>

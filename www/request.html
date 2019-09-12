@@ -21,19 +21,19 @@
 </head>
 
 <body
-    style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
+    style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
+    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43); width: 100%;">
         <!-- Toggler/collapsibe Button -->
         <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
             <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
-                <span>&nbsp;</span>
-                <span>&nbsp;</span>
-                <span>&nbsp;</span>
-            </label></span>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                </label></span>
         </a>
 
         <!-- <h4 class="text-light ">SomDai</h4> -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" style="right: 0;">
             <img src="img/logo.png" alt="logonav" style="width: 60px;">
         </a>
 
@@ -66,8 +66,12 @@
         <!-- <div id="requestlist" class="container req">
             <hr>
         </div> -->
-        <div class="container mt-3">
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <div class="container form-row mt-3" style="width: 100%;">
+            <input class="form-control col" id="myInput" type="text" placeholder="Search..">
+            <select class="form-control col" id="status">
+                <option value="1">วันที่แจ้งซ่อม</option>
+                <option value="2">สถานะการดำเนินงาน</option>
+            </select>
             <br>
             <div id="requestlist" class="container req">
                 <hr>
@@ -98,7 +102,7 @@
         function init() {
             var xmlhttp = new XMLHttpRequest();
             var email = localStorage.getItem("email");
-            var url1 = "https://"+IP+":8443/technicains";
+            var url1 = "https://" + IP + ":8443/technicains";
             xmlhttp.open("GET", url1, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -112,7 +116,7 @@
                     }
                 }
                 if (ID === 0) {
-                    url2 = "https://"+IP+":8443/employees";
+                    url2 = "https://" + IP + ":8443/employees";
                     xmlhttp.open("GET", url2, false);
                     xmlhttp.send();
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -133,57 +137,72 @@
         function selectRepairingByID() {
             var xmlhttp = new XMLHttpRequest();
             var url;
-            var pos; if (department === "Engineering") {
+            var pos;
+            if (department === "Engineering") {
                 if (position === "Supervisor") {
-                    url = "https://"+IP+":8443/repairing";
                     pos = "H";
+                    if (status === 2) {
+                        url = "https://" + IP + ":8443/repairing/status";
+                    } else {
+                        url = "https://" + IP + ":8443/repairing";
+                    }
                 } else {
-                    url = "https://"+IP+":8443/repairing/technicain/" + ID;
                     pos = "E";
+                    if (status === 2) {
+                        url = "https://" + IP + ":8443/repairing/technicain/status/" + ID;
+                    } else {
+                        url = "https://" + IP + ":8443/repairing/technicain/" + ID;
+                    }
+
+
                 }
             } else {
-                url = "https://"+IP+":8443/repairing/department/" + department;
-            }
-            xmlhttp.open("GET", url, false);
-            xmlhttp.send();
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var output = xmlhttp.responseText;
-                var jsoutput = JSON.parse(output);
-                console.log(jsoutput.length);
-
-                for (let i = 0; i < jsoutput.length; i++) {
-                    detail.push(jsoutput[i].detail);
-                    date.push(jsoutput[i].date);
-                    employeeID.push(jsoutput[i].employeeID);
-                    repairID.push(jsoutput[i].repairingID);
-
-                    if (pos === "H") {
-                        if (jsoutput[i].statusHead === "y") {
-                            color.push("green")
-                        } else if (jsoutput[i].statusHead === "n") {
-                            color.push("red")
-                        }
-
-                    } else if (pos === "E") {
-                        if (jsoutput[i].statusTech === "y") {
-                            color.push("green")
-                        } else if (jsoutput[i].statusTech === "n") {
-                            color.push("red")
-                        }
-                    } else {
-                        color.push("white")
-                    }
+                if (status === 2) {
+                    url = "https://" + IP + ":8443/repairing/department/status/" + department;
+                } else {
+                    url = "https://" + IP + ":8443/repairing/department/" + department;
                 }
             }
-            console.log(detail);
-            console.log(date);
+        }
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send();
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var output = xmlhttp.responseText;
+            var jsoutput = JSON.parse(output);
+            console.log(jsoutput.length);
 
+            for (let i = 0; i < jsoutput.length; i++) {
+                detail.push(jsoutput[i].detail);
+                date.push(jsoutput[i].date);
+                employeeID.push(jsoutput[i].employeeID);
+                repairID.push(jsoutput[i].repairingID);
+
+                if (pos === "H") {
+                    if (jsoutput[i].statusHead === "y") {
+                        color.push("green")
+                    } else if (jsoutput[i].statusHead === "n") {
+                        color.push("red")
+                    }
+
+                } else if (pos === "E") {
+                    if (jsoutput[i].statusTech === "y") {
+                        color.push("green")
+                    } else if (jsoutput[i].statusTech === "n") {
+                        color.push("red")
+                    }
+                } else {
+                    color.push("white")
+                }
+            }
+        
+        console.log(detail);
+        console.log(date);
         }
 
         function selectEmployeeByID() {
             for (let i = 0; i < employeeID.length; i++) {
                 var xmlhttp = new XMLHttpRequest();
-                var url = "https://"+IP+":8443/employees/employeeID/" + employeeID[i];
+                var url = "https://" + IP + ":8443/employees/employeeID/" + employeeID[i];
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -221,9 +240,9 @@
             var url;
             if (department === "Engineering") {
                 if (position === "Supervisor") {
-                    url = "https://"+IP+":8443/repairing/update/statusHead/" + repairID;
+                    url = "https://" + IP + ":8443/repairing/update/statusHead/" + repairID;
                 } else {
-                    url = "https://"+IP+":8443/repairing/update/statusTech/" + repairID;
+                    url = "https://" + IP + ":8443/repairing/update/statusTech/" + repairID;
                 }
             }
             xmlhttp.open("GET", url, false);

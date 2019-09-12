@@ -21,8 +21,8 @@
 </head>
 
 <body
-    style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
+    style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
+    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43); width: 100%;">
         <!-- Toggler/collapsibe Button -->
         <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
             <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
@@ -33,7 +33,7 @@
         </a>
 
         <!-- <h4 class="text-light ">SomDai</h4> -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" style="right: 0;">
             <img src="img/logo.png" alt="logonav" style="width: 60px;">
         </a>
 
@@ -66,8 +66,12 @@
         <!-- <div id="requestlist" class="container req">
             <hr>
         </div> -->
-        <div class="container mt-3">
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <div class="container form-row mt-3" style="width: 100%;">
+            <input class="form-control col" id="myInput" type="text" placeholder="Search.." >
+            <select class="form-control col" id="department" >
+                <option value="1">วันที่แจ้งซ่อม</option>
+                <option value="2">สถานะการดำเนินงาน</option>
+            </select>
             <br>
             <div id="requestlist" class="container req">
                 <hr>

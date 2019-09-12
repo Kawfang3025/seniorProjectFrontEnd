@@ -26,6 +26,9 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     /* background: #1c2e92; */
     background-image: radial-gradient( circle 1107px at 15.4% 25.3%,  rgba(33,210,233,1) 26.9%, rgba(55,84,176,1) 80.8% );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
     font-size:12px;
     height:100%;
     margin:0px;
