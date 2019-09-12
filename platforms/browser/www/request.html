@@ -72,7 +72,7 @@
                 <option value="1">วันที่แจ้งซ่อม</option>
                 <option value="2">สถานะการดำเนินงาน</option>
             </select>
-            <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID()" role="button">ยืนยัน</a>
+            <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID(ID)" role="button">ยืนยัน</a>
             <br>
             <div id="requestlist" class="container req">
                 <hr>
@@ -143,29 +143,29 @@
             if (department === "Engineering") {
                 if (position === "Supervisor") {
                     pos = "H";
-                    if (status === 2) {
+                    if (status === "2") {
                         url = "https://" + IP + ":8443/repairing/status";
                     } else {
                         url = "https://" + IP + ":8443/repairing";
                     }
                 } else {
                     pos = "E";
-                    if (status === 2) {
+                    if (status === "2") {
                         url = "https://" + IP + ":8443/repairing/technicain/status/" + ID;
                     } else {
                         url = "https://" + IP + ":8443/repairing/technicain/" + ID;
                     }
                 }
             } else {
-                if (status === 2) {
+                if (status === "2") {
                     url = "https://" + IP + ":8443/repairing/department/status/" + department;
                 } else {
                     url = "https://" + IP + ":8443/repairing/department/" + department;
                 }
             }
-
+            showRepairList()
             console.log(status);
-
+            console.log(url);
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -222,9 +222,8 @@
             console.log(lastname);
         }
 
-
         function showRepairList() {
-
+            
             for (let i = 0; i < detail.length; i++) {
                 document.getElementById('requestlist').innerHTML += '<div onclick="showdetail(`' + firstname[i] + '`,`' + lastname[i] + '`,`' + detail[i] + '`,`' + employeeID[i] + '`,`' + repairID[i] + '`)"  class="row"><hr><i class="fas fa-circle ml-1 " style="color:' + color[i] + '"></i>' +
                     '<img src="img/picpro.jpg" class="col-2 rounded-circle pl-0 pr-0" width="100%">' +
@@ -234,6 +233,7 @@
                     '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + detail[i] + '</a>' +
                     '</div> </div></div><hr>';
             }
+
         }
 
         function showdetail(firstname, lastname, detail, empID, repairID) {
