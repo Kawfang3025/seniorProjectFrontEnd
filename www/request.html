@@ -72,6 +72,7 @@
                 <option value="1">วันที่แจ้งซ่อม</option>
                 <option value="2">สถานะการดำเนินงาน</option>
             </select>
+            <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID()" role="button">ยืนยัน</a>
             <br>
             <div id="requestlist" class="container req">
                 <hr>
@@ -138,6 +139,7 @@
             var xmlhttp = new XMLHttpRequest();
             var url;
             var pos;
+            var status = document.getElementById('status').value;
             if (department === "Engineering") {
                 if (position === "Supervisor") {
                     pos = "H";
@@ -153,8 +155,6 @@
                     } else {
                         url = "https://" + IP + ":8443/repairing/technicain/" + ID;
                     }
-
-
                 }
             } else {
                 if (status === 2) {
@@ -163,49 +163,51 @@
                     url = "https://" + IP + ":8443/repairing/department/" + department;
                 }
             }
-        }
-        xmlhttp.open("GET", url, false);
-        xmlhttp.send();
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var output = xmlhttp.responseText;
-            var jsoutput = JSON.parse(output);
-            console.log(jsoutput.length);
 
-            for (let i = 0; i < jsoutput.length; i++) {
-                detail.push(jsoutput[i].detail);
-                date.push(jsoutput[i].date);
-                employeeID.push(jsoutput[i].employeeID);
-                repairID.push(jsoutput[i].repairingID);
+            console.log(status);
 
-                if (pos === "H") {
-                    if (jsoutput[i].statusHead === "y") {
-                        color.push("green")
-                    } else if (jsoutput[i].statusHead === "n") {
-                        color.push("red")
+            xmlhttp.open("GET", url, false);
+            xmlhttp.send();
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                console.log(jsoutput.length);
+
+                for (let i = 0; i < jsoutput.length; i++) {
+                    detail.push(jsoutput[i].detail);
+                    date.push(jsoutput[i].date);
+                    employeeID.push(jsoutput[i].employeeID);
+                    repairID.push(jsoutput[i].repairingID);
+
+                    if (pos === "H") {
+                        if (jsoutput[i].statusHead === "y") {
+                            color.push("green")
+                        } else if (jsoutput[i].statusHead === "n") {
+                            color.push("red")
+                        }
+
+                    } else if (pos === "E") {
+                        if (jsoutput[i].statusTech === "y") {
+                            color.push("green")
+                        } else if (jsoutput[i].statusTech === "n") {
+                            color.push("red")
+                        }
+                    } else {
+                        color.push("white")
                     }
-
-                } else if (pos === "E") {
-                    if (jsoutput[i].statusTech === "y") {
-                        color.push("green")
-                    } else if (jsoutput[i].statusTech === "n") {
-                        color.push("red")
-                    }
-                } else {
-                    color.push("white")
                 }
-            }
-        
-        console.log(detail);
-        console.log(date);
-        }
 
+                console.log(detail);
+                console.log(date);
+            }
+        }
         function selectEmployeeByID() {
             for (let i = 0; i < employeeID.length; i++) {
                 var xmlhttp = new XMLHttpRequest();
                 var url = "https://" + IP + ":8443/employees/employeeID/" + employeeID[i];
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var output = xmlhttp.responseText;
                     var jsoutput = JSON.parse(output);
                     for (let j = 0; j < jsoutput.length; j++) {
