@@ -39,21 +39,21 @@
                             window.location.href = 'request.html';
                         }
                     }
-                } else {
-                    var xmlhttp = new XMLHttpRequest();
-                    var url1 = "https://" + IP + ":8443/employees";
-                    xmlhttp.open("GET", url1, false);
-                    xmlhttp.send();
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        var output = xmlhttp.responseText;
-                        var jsoutput = JSON.parse(output);
-                        for (let i = 0; i < jsoutput.length; i++) {
-                            if (cogniEmail === jsoutput[i].e_mail) {
-                                window.location.href = 'request.html';
-                            }
+                }
+                var xmlhttp = new XMLHttpRequest();
+                var url1 = "https://" + IP + ":8443/employees";
+                xmlhttp.open("GET", url1, false);
+                xmlhttp.send();
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var output = xmlhttp.responseText;
+                    var jsoutput = JSON.parse(output);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        if (cogniEmail === jsoutput[i].e_mail) {
+                            window.location.href = 'request.html';
                         }
                     }
                 }
+
             }
         }
     </script>
