@@ -4,7 +4,6 @@
 
 <head>
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
@@ -12,50 +11,50 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>SomDai</title>
-    <script type="text/javascript" src="js/index.js"></script>
 
     <script>
-        localStorage.setItem("IP", "192.168.1.55");
+        localStorage.setItem("IP", "172.26.251.142");
         var IP = localStorage.getItem("IP");
-        var cogniEmail = localStorage.getItem("email");
+        window.onerror = function (msg, url, linenumber) {
+            alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
+            return true;
+        }
         setTimeout(getData, 2000);
 
         function getData() {
-            alert(IP);
-            alert(cogniEmail);
+
+            var cogniEmail = localStorage.getItem("email");
             if (cogniEmail === null) {
                 window.location.href = 'login.html';
-                alert('2');
-
-
             } else {
                 var xmlhttp = new XMLHttpRequest();
-                var url = "http://" + IP + ":8080/technicains";
-                alert(url);
+                var url = "https://" + IP + ":8443/technicains";
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
-                var email = [];
-                alert('3');
-                
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var output = xmlhttp.responseText;
                     var jsoutput = JSON.parse(output);
                     for (let i = 0; i < jsoutput.length; i++) {
                         if (cogniEmail === jsoutput[i].e_mail) {
-                            email[0] = jsoutput[i].e_mail;
+                            window.location.href = 'request.html';
                         }
-
-                    } console.log(email[0]);
+                    }
                 }
-                if (email[0] === cogniEmail) {
-                    window.location.href = 'request.html';
-                } else {
-                    window.location.href = 'login.html';
+                var xmlhttp = new XMLHttpRequest();
+                var url1 = "https://" + IP + ":8443/employees";
+                xmlhttp.open("GET", url1, false);
+                xmlhttp.send();
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var output = xmlhttp.responseText;
+                    var jsoutput = JSON.parse(output);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        if (cogniEmail === jsoutput[i].e_mail) {
+                            window.location.href = 'request.html';
+                        }
+                    }
                 }
 
             }
-
-
         }
     </script>
 </head>
