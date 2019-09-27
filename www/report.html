@@ -70,16 +70,18 @@
             </select>
             <select class="form-control " id="yearShow" style="width: 87%">
             </select>
-            <a name="" id="" class="btn btn-primary " onclick="getdata()" role="button">ยืนยัน</a>
+            <a name="" id="" class="btn btn-primary " onclick="finishdata()" role="button">ยืนยัน</a>
         </div>
         <canvas id="myChart"></canvas>
     </div>
     <script>
         var IP = localStorage.getItem("IP");
         var year = [];
-        var month = [];
+        var finish = [];
+        var notfinish = [];
         yearlist();
-        getdata();
+        finishdata();
+        notfinishdata();
         showChart()
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
@@ -102,47 +104,87 @@
             console.log(year)
         }
 
-	function getdata() {
-            month = [];
+        function finishdata() {
+            finish = [];
             var year = document.getElementById('yearShow').value;
             var department = document.getElementById('department').value;
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://"+IP+":8443/count";
-            if(department !== 'ทุกแผนก'){
-                url1 = "https://"+IP+":8443/count/deparment/"+department;
+            var url1 = "https://" + IP + ":8443/countStatusFinish";
+            if (department !== 'ทุกแผนก') {
+                url1 = "https://" + IP + ":8443/CountStatusFinish/deparment/" + department;
             }
             xmlhttp.open("GET", url1, false);
             console.log(url1);
-            
-            xmlhttp.send(); 
+
+            xmlhttp.send();
             console.log(xmlhttp.status);
-            
+
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var output = xmlhttp.responseText;
                 var jsoutput = JSON.parse(output);
                 for (let i = 0; i < jsoutput.length; i++) {
-                    console.log("get "+year);
-					if (jsoutput[i].year === year){
-						console.log(xmlhttp.status);
-						month.push(jsoutput[i].jan);
-						month.push(jsoutput[i].feb);
-						month.push(jsoutput[i].mar);
-						month.push(jsoutput[i].apr);
-						month.push(jsoutput[i].may);
-						month.push(jsoutput[i].jun);
-						month.push(jsoutput[i].jul);
-						month.push(jsoutput[i].aug);
-						month.push(jsoutput[i].sep);
-						month.push(jsoutput[i].oct);
-						month.push(jsoutput[i].nov);
-						month.push(jsoutput[i].dec);
-					}
+                    console.log("get " + year);
+                    if (jsoutput[i].year === year) {
+                        console.log(xmlhttp.status);
+                        finish.push(jsoutput[i].jan);
+                        finish.push(jsoutput[i].feb);
+                        finish.push(jsoutput[i].mar);
+                        finish.push(jsoutput[i].apr);
+                        finish.push(jsoutput[i].may);
+                        finish.push(jsoutput[i].jun);
+                        finish.push(jsoutput[i].jul);
+                        finish.push(jsoutput[i].aug);
+                        finish.push(jsoutput[i].sep);
+                        finish.push(jsoutput[i].oct);
+                        finish.push(jsoutput[i].nov);
+                        finish.push(jsoutput[i].dec);
+                    }
+                }
+            }
+            notfinishdata()
+            console.log(finish)
+        }
+
+        function notfinishdata() {
+            notfinish = [];
+            var year = document.getElementById('yearShow').value;
+            var department = document.getElementById('department').value;
+            var xmlhttp = new XMLHttpRequest();
+            var url1 = "https://" + IP + ":8443/CountStatusNotFinish";
+            if (department !== 'ทุกแผนก') {
+                url1 = "https://" + IP + ":8443/CountStatusNotFinish/deparment/" + department;
+            }
+            xmlhttp.open("GET", url1, false);
+            console.log(url1);
+
+            xmlhttp.send();
+            console.log(xmlhttp.status);
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < jsoutput.length; i++) {
+                    console.log("get " + year);
+                    if (jsoutput[i].year === year) {
+                        console.log(xmlhttp.status);
+                        notfinish.push(jsoutput[i].jan);
+                        notfinish.push(jsoutput[i].feb);
+                        notfinish.push(jsoutput[i].mar);
+                        notfinish.push(jsoutput[i].apr);
+                        notfinish.push(jsoutput[i].may);
+                        notfinish.push(jsoutput[i].jun);
+                        notfinish.push(jsoutput[i].jul);
+                        notfinish.push(jsoutput[i].aug);
+                        notfinish.push(jsoutput[i].sep);
+                        notfinish.push(jsoutput[i].oct);
+                        notfinish.push(jsoutput[i].nov);
+                        notfinish.push(jsoutput[i].dec);
+                    }
                 }
             }
             showChart()
-            console.log(month)
+            console.log(notfinish)
         }
-
         function showChart() {
             var department = document.getElementById('department').value;
             var ctx = document.getElementById('myChart').getContext('2d');
@@ -150,47 +192,24 @@
                 type: 'bar',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'รายการซ่อมของ '+department,
-                        data: [month[0], month[1], month[2], month[3], month[4], month[5], month[6], month[7], month[8], month[9], month[10], month[11]],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(55, 99, 132, 0.2)',
-                            'rgba(74, 162, 235, 0.2)',
-                            'rgba(65, 206, 86, 0.2)',
-                            'rgba(95, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(115, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(55, 99, 132, 1)',
-                            'rgba(74, 162, 235, 1)',
-                            'rgba(65, 206, 86, 1)',
-                            'rgba(95, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(115, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
+                    datasets: [
+                        {
+                            label: 'รายการซ่อมที่เสร็จสิ้น',
+                            data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
+                            backgroundColor: '#32CCD1',
+                        },
+                        {
+                            label: 'รายการซ่อมที่ยังไม่เสร็จสิ้น',
+                            data: [notfinish[0], notfinish[1], notfinish[2], notfinish[3], notfinish[4], notfinish[5], notfinish[6], notfinish[7], notfinish[8], notfinish[9], notfinish[10], notfinish[11]],
+                            backgroundColor: '#7E817C',
+                        }
+                    ]
+
                 },
                 options: {
                     scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
+                        xAxes: [{ stacked: true }],
+                        yAxes: [{ stacked: true }]
                     }
                 }
             });
