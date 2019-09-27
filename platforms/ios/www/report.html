@@ -11,20 +11,25 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <title>SomDai</title>
 </head>
 
 <body
     style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
+    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43)">
         <!-- Toggler/collapsibe Button -->
-        <a id="main" style="color: aliceblue">
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+            <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                </label></span>
         </a>
 
         <!-- <h4 class="text-light ">SomDai</h4> -->
         <a class="navbar-brand" href="#">
-            <img src="img/logo.png" alt="logo" style="width:40px;">
+            <img src="img/logo.png" alt="logonav" style="width: 60px;">
         </a>
 
     </nav>
@@ -48,10 +53,10 @@
         <a href="javascript:logout();">ออกจากระบบ</a>
     </div>
     <div class="container ">
-        <div class="form-group pt-2">
+        <div class="form-group pt-2 ">
             <label for="exampleFormControlTextarea1">รายงานการแจ้งซ่อม</label>
             <select class="form-control " id="department" style="width: 87%">
-                <option value="All">ทุกแผนกแผนก</option>
+                <option value="ทุกแผนก">ทุกแผนก</option>
                 <option value="Sale and Marketing">Sale and Marketing</option>
                 <option value="Accounting">Accounting</option>
                 <option value="Purchased">Purchased</option>
@@ -66,16 +71,20 @@
             </select>
             <select class="form-control " id="yearShow" style="width: 87%">
             </select>
+            <a name="" id="" class="btn btn-primary " onclick="getdata()" role="button">ยืนยัน</a>
         </div>
         <canvas id="myChart"></canvas>
     </div>
     <script>
         var IP = localStorage.getItem("IP");
         var year = [];
+        var month = [];
         yearlist();
+        getdata();
+        showChart()
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://" + IP + ":8080/repairing";
+            var url = "https://" + IP + ":8443/repairing";
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -94,63 +103,106 @@
             console.log(year)
         }
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
-                datasets: [{
-                    label: 'รายงานการซ่อมทุกแผนก',
-                    data: [12, 19, 3, 5, 2, 3,12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(55, 99, 132, 0.2)',
-                        'rgba(74, 162, 235, 0.2)',
-                        'rgba(65, 206, 86, 0.2)',
-                        'rgba(95, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(115, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(55, 99, 132, 1)',
-                        'rgba(74, 162, 235, 1)',
-                        'rgba(65, 206, 86, 1)',
-                        'rgba(95, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(115, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+	function getdata() {
+            month = [];
+            var year = document.getElementById('yearShow').value;
+            var department = document.getElementById('department').value;
+            var xmlhttp = new XMLHttpRequest();
+            var url1 = "https://"+IP+":8443/count";
+            if(department !== 'ทุกแผนก'){
+                url1 = "https://"+IP+":8443/count/deparment/"+department;
+            }
+            xmlhttp.open("GET", url1, false);
+            console.log(url1);
+            
+            xmlhttp.send(); 
+            console.log(xmlhttp.status);
+            
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < jsoutput.length; i++) {
+                    console.log("get "+year);
+					if (jsoutput[i].year === year){
+						console.log(xmlhttp.status);
+						month.push(jsoutput[i].jan);
+						month.push(jsoutput[i].feb);
+						month.push(jsoutput[i].mar);
+						month.push(jsoutput[i].apr);
+						month.push(jsoutput[i].may);
+						month.push(jsoutput[i].jun);
+						month.push(jsoutput[i].jul);
+						month.push(jsoutput[i].aug);
+						month.push(jsoutput[i].sep);
+						month.push(jsoutput[i].oct);
+						month.push(jsoutput[i].nov);
+						month.push(jsoutput[i].dec);
+					}
                 }
             }
-        });
+            showChart()
+            console.log(month)
+        }
 
+        function showChart() {
+            var department = document.getElementById('department').value;
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'รายการซ่อมของ '+department,
+                        data: [month[0], month[1], month[2], month[3], month[4], month[5], month[6], month[7], month[8], month[9], month[10], month[11]],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(55, 99, 132, 0.2)',
+                            'rgba(74, 162, 235, 0.2)',
+                            'rgba(65, 206, 86, 0.2)',
+                            'rgba(95, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(115, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(55, 99, 132, 1)',
+                            'rgba(74, 162, 235, 1)',
+                            'rgba(65, 206, 86, 1)',
+                            'rgba(95, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(115, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
 
+        }
     </script>
 
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -158,7 +210,7 @@
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
 
 
 </html>

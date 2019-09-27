@@ -64,8 +64,6 @@
 </body>
 <script>
 	var IP = localStorage.getItem("IP");
-
-
 	function authen(email, password) {
 		let check = 0;
 		var ID = 0;
@@ -89,7 +87,6 @@
 					localStorage.setItem("email", email);
 					window.location.href = 'request.html'
 					check = 1;
-
 				}
 			}
 			alert(ID);

@@ -15,37 +15,41 @@
 </head>
 
 <body style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: rgb(10, 6, 43)">
-                <!-- Toggler/collapsibe Button -->
-                <a id="main" style="color: aliceblue">
-                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                </a>
-        
-                <!-- <h4 class="text-light ">SomDai</h4> -->
-                <a class="navbar-brand" href="#">
-                    <img src="img/logo.png" alt="logo" style="width:40px;">
-                </a>
-        
-            </nav>
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <div class="col-8 ">
-                    <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
+    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43)">
+        <!-- Toggler/collapsibe Button -->
+        <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+            <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+            </label></span>
+        </a>
+
+        <!-- <h4 class="text-light ">SomDai</h4> -->
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="logonav" style="width: 60px;">
+        </a>
+
+    </nav>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="col-8 ">
+            <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
+        </div>
+        <div class="col-16">
+            <div class="card" style="width: auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
+
                 </div>
-                <div class="col-16">
-                    <div class="card" style="width: auto">
-                        <div class="card-body">
-                            <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
-                            <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
-        
-                        </div>
-                    </div>
-                </div>
-                <a href="request.html">หน้าหลัก</a>
-                <a href="newRequest.html">แจ้งซ่อม</a>
-                <a href="report.html">รายงานการแจ้งซ่อม</a>
-                <a href="javascript:logout();">ออกจากระบบ</a>
             </div>
+        </div>
+        <a href="request.html">หน้าหลัก</a>
+        <a href="newRequest.html">แจ้งซ่อม</a>
+        <a href="report.html">รายงานการแจ้งซ่อม</a>
+        <a href="javascript:logout();">ออกจากระบบ</a>
+    </div>
     <div class="container" style="padding-left: 0%;padding-right: 0%">
         <!-- <a name="" id="" class="btn btn-dark rounded-0 top-left mt-2" href="request.html" role="button">
             กลับก่อนหน้า</a> -->
@@ -96,7 +100,7 @@
         var empID = localStorage.getItem('empID');
         var xmlhttp = new XMLHttpRequest();
         var IP = localStorage.getItem("IP");
-        var url = "http://"+IP+":8080/employees/employeeID/" + empID;
+        var url = "https://"+IP+":8443/employees/employeeID/" + empID;
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -117,7 +121,7 @@
 
 
         var xmlhttp = new XMLHttpRequest();
-        var url = "http://"+IP+":8080/technicains";
+        var url = "https://"+IP+":8443/technicains";
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -130,7 +134,7 @@
             }
         }
         var xmlhttp = new XMLHttpRequest();
-        var url1 = "http://"+IP+":8080/repairing/repairingID/" + localStorage.getItem('repairID');
+        var url1 = "https://"+IP+":8443/repairing/repairingID/" + localStorage.getItem('repairID');
         xmlhttp.open("GET", url1, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -139,7 +143,7 @@
             if (jsoutput[0].technicainID !== "") {
                 var technicain = jsoutput[0].technicainID;
                 var xmlhttp = new XMLHttpRequest();
-                var url2 = "http://"+IP+":8080/technicains/technicainID/" + technicain;
+                var url2 = "https://"+IP+":8443/technicains/technicainID/" + technicain;
                 xmlhttp.open("GET", url2, false);
                 xmlhttp.send();
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -149,7 +153,7 @@
                 }
             }
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "http://"+IP+":8080/repairing/repairingID/" + localStorage.getItem('repairID');
+            var url1 = "https://"+IP+":8443/repairing/repairingID/" + localStorage.getItem('repairID');
             xmlhttp.open("GET", url1, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -180,12 +184,12 @@
             console.log(choosingT);
 
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://"+IP+":8080/repairing/update/technicainID/" + localStorage.getItem('repairID') + "," + choosingT;
+            var url = "https://"+IP+":8443/repairing/update/technicainID/" + localStorage.getItem('repairID') + "," + choosingT;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
 
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://"+IP+":8080/technicains/technicainID/" + choosingT;
+            var url = "https://"+IP+":8443/technicains/technicainID/" + choosingT;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -206,7 +210,7 @@
             console.log(dateRP);
 
             var xmlhttp = new XMLHttpRequest();
-            var url = "http://"+IP+":8080/repairing/update/dateRP/" + localStorage.getItem('repairID') + "," + dateRP;
+            var url = "https://"+IP+":8443/repairing/update/dateRP/" + localStorage.getItem('repairID') + "," + dateRP;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             window.location.href = 'requestdetail.html'
