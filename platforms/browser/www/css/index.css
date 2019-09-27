@@ -203,3 +203,9 @@ html {
     line-height: 1.428571429;
     border-radius: 30px;
   }
+    .bs-example{
+        margin-top: 20px;
+    }
+    body{
+        padding-top: 70px;
+    }
