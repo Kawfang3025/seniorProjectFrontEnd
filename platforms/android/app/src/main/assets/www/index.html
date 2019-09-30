@@ -13,7 +13,7 @@
     <title>SomDai</title>
 
     <script>
-        localStorage.setItem("IP", "192.168.1.55");
+        localStorage.setItem("IP", "172.26.251.142");
         var IP = localStorage.getItem("IP");
         window.onerror = function (msg, url, linenumber) {
             alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
@@ -35,6 +35,7 @@
                     var output = xmlhttp.responseText;
                     var jsoutput = JSON.parse(output);
                     for (let i = 0; i < jsoutput.length; i++) {
+                        console.log(jsoutput[i].e_mail)
                         if (cogniEmail === jsoutput[i].e_mail) {
                             window.location.href = 'request.html';
                         }
