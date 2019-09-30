@@ -79,10 +79,10 @@
         var IP = localStorage.getItem("IP");
         var year = [];
         var finish = [];
-        var notfinish = [];
+        var all = [];
         yearlist();
         finishdata();
-        notfinishdata();
+        alldata();
         showChart()
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
@@ -142,18 +142,18 @@
                     }
                 }
             }
-            notfinishdata()
+            alldata()
             console.log(finish)
         }
-
-        function notfinishdata() {
-            notfinish = [];
+        var department;
+        function alldata() {
+            all = [];
             var year = document.getElementById('yearShow').value;
-            var department = document.getElementById('department').value;
+            department = document.getElementById('department').value;
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/CountStatusNotFinish";
+            var url1 = "https://" + IP + ":8443/count";
             if (department !== 'ทุกแผนก') {
-                url1 = "https://" + IP + ":8443/CountStatusNotFinish/deparment/" + department;
+                url1 = "https://" + IP + ":8443/count/deparment/" + department;
             }
             xmlhttp.open("GET", url1, false);
             console.log(url1);
@@ -168,23 +168,23 @@
                     console.log("get " + year);
                     if (jsoutput[i].year === year) {
                         console.log(xmlhttp.status);
-                        notfinish.push(jsoutput[i].jan);
-                        notfinish.push(jsoutput[i].feb);
-                        notfinish.push(jsoutput[i].mar);
-                        notfinish.push(jsoutput[i].apr);
-                        notfinish.push(jsoutput[i].may);
-                        notfinish.push(jsoutput[i].jun);
-                        notfinish.push(jsoutput[i].jul);
-                        notfinish.push(jsoutput[i].aug);
-                        notfinish.push(jsoutput[i].sep);
-                        notfinish.push(jsoutput[i].oct);
-                        notfinish.push(jsoutput[i].nov);
-                        notfinish.push(jsoutput[i].dec);
+                        all.push(jsoutput[i].jan);
+                        all.push(jsoutput[i].feb);
+                        all.push(jsoutput[i].mar);
+                        all.push(jsoutput[i].apr);
+                        all.push(jsoutput[i].may);
+                        all.push(jsoutput[i].jun);
+                        all.push(jsoutput[i].jul);
+                        all.push(jsoutput[i].aug);
+                        all.push(jsoutput[i].sep);
+                        all.push(jsoutput[i].oct);
+                        all.push(jsoutput[i].nov);
+                        all.push(jsoutput[i].dec);
                     }
                 }
             }
             showChart()
-            console.log(notfinish)
+            console.log(all)
         }
         function showChart() {
             var department = document.getElementById('department').value;
@@ -195,25 +195,29 @@
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [
                         {
-                            label: 'รายการซ่อมที่เสร็จสิ้น',
-                            data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
-                            backgroundColor: '#32CCD1',
+                            label: "รายการซ่อมทั้งหมด" + department,
+                            data: [all[0], all[1], all[2], all[3], all[4], all[5], all[6], all[7], all[8], all[9], all[10], all[11]],
+                            backgroundColor: '#7E817C'
                         },
                         {
-                            label: 'รายการซ่อมที่ยังไม่เสร็จสิ้น',
-                            data: [notfinish[0], notfinish[1], notfinish[2], notfinish[3], notfinish[4], notfinish[5], notfinish[6], notfinish[7], notfinish[8], notfinish[9], notfinish[10], notfinish[11]],
-                            backgroundColor: '#7E817C',
+                            label: "รายการซ่อมที่เสร็จสิ้น" + department,
+                            data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
+                            backgroundColor: '#32CCD1'
                         }
                     ]
 
                 },
                 options: {
                     scales: {
-                        xAxes: [{ stacked: true }],
-                        yAxes: [{ stacked: true }]
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
                 }
-            });
+            }
+            );
 
         }
     </script>
