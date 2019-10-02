@@ -22,65 +22,61 @@
 
 <body
     style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
-    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43); width: 100%;">
-        <!-- Toggler/collapsibe Button -->
-        <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
-            <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
-                    <span>&nbsp;</span>
-                    <span>&nbsp;</span>
-                    <span>&nbsp;</span>
-                </label></span>
-        </a>
+    <div class="bs-example">
+        <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43); width: 100%;">
+            <!-- Toggler/collapsibe Button -->
+            <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+                <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                    </label></span>
+            </a>
 
-        <!-- <h4 class="text-light ">SomDai</h4> -->
-        <a class="navbar-brand" href="#" style="right: 0;">
-            <img src="img/logo.png" alt="logonav" style="width: 60px;">
-        </a>
+            <!-- <h4 class="text-light ">SomDai</h4> -->
+            <a class="navbar-brand" href="#" style="right: 0;">
+                <img src="img/logo.png" alt="logonav" style="width: 60px;">
+            </a>
 
-    </nav>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="col-8 ">
-            <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
-        </div>
-        <div class="col-16">
-            <div class="card" style="width: auto">
-                <div class="card-body">
-                    <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
-                    <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
+        </nav>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="col-8 ">
+                <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
+            </div>
+            <div class="col-16">
+                <div class="card" style="width: auto">
+                    <div class="card-body">
+                        <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
 
+                    </div>
                 </div>
             </div>
+            <a href="request.html">หน้าหลัก</a>
+            <a href="newRequest.html">แจ้งซ่อม</a>
+            <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
-        <a href="request.html">หน้าหลัก</a>
-        <a href="newRequest.html">แจ้งซ่อม</a>
-        <a href="report.html">รายงานการแจ้งซ่อม</a>
-        <a href="javascript:logout();">ออกจากระบบ</a>
-    </div>
-    <!-- <div id="main">
+        <!-- <div id="main">
             <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
           </div> -->
-    <div class="container" style="padding-left: 0%;height: 100%;">
-        <!-- <a name="" id="" class="btn btn-dark rounded-0 top-left mt-2" href="home.html" role="button"> กลับหน้าเมนู</a> -->
-
-        <!-- <div id="requestlist" class="container req">
-            <hr>
-        </div> -->
-        <div class="container form-row mt-3" style="width: 100%;">
-            <input class="form-control col" id="myInput" type="text" placeholder="Search..">
-            <select class="form-control col" id="status">
-                <option value="1">วันที่แจ้งซ่อม</option>
-                <option value="2">สถานะการดำเนินงาน</option>
-            </select>
-            <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID()" role="button">ยืนยัน</a>
-            <br>
-            <div id="requestlist" class="container req">
-                <hr>
+        <div class="container" style="padding-left: 0%;height: 100%;">
+            <div class="container form-row mt-3" style="width: 100%;">
+                <input class="form-control col" id="myInput" type="text" placeholder="Search..">
+                <select class="form-control col" id="status">
+                    <option value="1">วันที่แจ้งซ่อม</option>
+                    <option value="2">สถานะการดำเนินงาน</option>
+                </select>
+                <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID()" role="button">ยืนยัน</a>
+                <br>
+                <div id="requestlist" class="container req">
+                    <hr>
+                </div>
             </div>
+
         </div>
-
     </div>
-
     <script>
         var ID = 0;
         var department;
@@ -165,10 +161,10 @@
             }
             console.log(status);
             console.log(url);
-            detail =[];
-            date =[];
+            detail = [];
+            date = [];
             employeeID = [];
-            repairID =[];
+            repairID = [];
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {

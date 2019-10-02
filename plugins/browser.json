@@ -15,7 +15,20 @@
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.hanuman.somdai"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
+    },
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
+    }
+  }
 }
