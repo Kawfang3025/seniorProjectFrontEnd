@@ -18,6 +18,7 @@
 <body
     style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
     <div class="bs-example">
+<<<<<<< HEAD
     <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
         <!-- Toggler/collapsibe Button -->
         <a id="main" class="m-0" style="color: rgb(255, 255, 255);height: 100%;">
@@ -44,47 +45,99 @@
                 <div class="card-body">
                     <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
                     <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
+=======
+        <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
+            <!-- Toggler/collapsibe Button -->
+            <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+                <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                    </label></span>
+            </a>
 
+            <!-- <h4 class="text-light ">SomDai</h4> -->
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="logonav" style="width: 60px;">
+            </a>
+
+        </nav>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="col-8 ">
+                <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
+            </div>
+            <div class="col-16">
+                <div class="card" style="width: auto">
+                    <div class="card-body">
+                        <h5 class="card-title" id="fname">ชื่อ-สกุล</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="position">ตำแหน่ง</h6>
+>>>>>>> 7cf46c7ff02e5956d69d7b28d19fa286bc5dff8a
+
+                    </div>
                 </div>
             </div>
+            <a href="request.html">หน้าหลัก</a>
+            <a href="newRequest.html">แจ้งซ่อม</a>
+            <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
-        <a href="request.html">หน้าหลัก</a>
-        <a href="newRequest.html">แจ้งซ่อม</a>
-        <a href="report.html">รายงานการแจ้งซ่อม</a>
-        <a href="javascript:logout();">ออกจากระบบ</a>
+        <div class="container ">
+            <div class="form-group pt-2 ">
+                <label for="exampleFormControlTextarea1">รายงานการแจ้งซ่อม</label>
+                <select class="form-control " id="department" style="width: 87%">
+                    <option value="ทุกแผนก">ทุกแผนก</option>
+                    <option value="Sale and Marketing">Sale and Marketing</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Purchased">Purchased</option>
+                    <option value="Operation">Operation</option>
+                    <option value="Guide">Guide</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Receptions">Receptions</option>
+                    <option value="Reservation">Reservation</option>
+                    <option value="Food and Beverage">Food and Beverage</option>
+                    <option value="Drivers">Drivers</option>
+                    <option value="Human Resources">Human Resources</option>
+                </select>
+                <select class="form-control " id="yearShow" style="width: 87%">
+                </select>
+                <a name="" id="" class="btn btn-primary " onclick="finishdata()+table()" role="button">ยืนยัน</a>
+                <p>
+                    <input type="button" value="Create PDF" id="btPrint" onclick="createPDF()" />
+                </p>
+            </div>
+            <canvas id="myChart"></canvas>
+            <div id="tab">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>เดือน</th>
+                            <th>รายการซ่อม</th>
+                            <th>ผู้แจ้งซ่อม</th>
+                            <th>ช่างที่รับผิดชอบ</th>
+                            <th>วันที่เข้าซ่อม</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="container ">
-        <div class="form-group pt-2 ">
-            <label for="exampleFormControlTextarea1">รายงานการแจ้งซ่อม</label>
-            <select class="form-control " id="department" style="width: 87%">
-                <option value="ทุกแผนก">ทุกแผนก</option>
-                <option value="Sale and Marketing">Sale and Marketing</option>
-                <option value="Accounting">Accounting</option>
-                <option value="Purchased">Purchased</option>
-                <option value="Operation">Operation</option>
-                <option value="Guide">Guide</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Receptions">Receptions</option>
-                <option value="Reservation">Reservation</option>
-                <option value="Food and Beverage">Food and Beverage</option>
-                <option value="Drivers">Drivers</option>
-                <option value="Human Resources">Human Resources</option>
-            </select>
-            <select class="form-control " id="yearShow" style="width: 87%">
-            </select>
-            <a name="" id="" class="btn btn-primary " onclick="finishdata()" role="button">ยืนยัน</a>
-        </div>
-        <canvas id="myChart"></canvas>
-    </div></div>
     <script>
         var IP = localStorage.getItem("IP");
         var year = [];
         var finish = [];
-        var notfinish = [];
+        var all = [];
+        var detail = [];
+        var emp = [];
+        var tech = [];
+        var dateRP = [];
         yearlist();
         finishdata();
-        notfinishdata();
+        alldata();
         showChart()
+        table()
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
             var url = "https://" + IP + ":8443/repairing";
@@ -143,18 +196,18 @@
                     }
                 }
             }
-            notfinishdata()
+            alldata()
             console.log(finish)
         }
-
-        function notfinishdata() {
-            notfinish = [];
+        var department;
+        function alldata() {
+            all = [];
             var year = document.getElementById('yearShow').value;
-            var department = document.getElementById('department').value;
+            department = document.getElementById('department').value;
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/CountStatusNotFinish";
+            var url1 = "https://" + IP + ":8443/count";
             if (department !== 'ทุกแผนก') {
-                url1 = "https://" + IP + ":8443/CountStatusNotFinish/deparment/" + department;
+                url1 = "https://" + IP + ":8443/count/deparment/" + department;
             }
             xmlhttp.open("GET", url1, false);
             console.log(url1);
@@ -169,23 +222,23 @@
                     console.log("get " + year);
                     if (jsoutput[i].year === year) {
                         console.log(xmlhttp.status);
-                        notfinish.push(jsoutput[i].jan);
-                        notfinish.push(jsoutput[i].feb);
-                        notfinish.push(jsoutput[i].mar);
-                        notfinish.push(jsoutput[i].apr);
-                        notfinish.push(jsoutput[i].may);
-                        notfinish.push(jsoutput[i].jun);
-                        notfinish.push(jsoutput[i].jul);
-                        notfinish.push(jsoutput[i].aug);
-                        notfinish.push(jsoutput[i].sep);
-                        notfinish.push(jsoutput[i].oct);
-                        notfinish.push(jsoutput[i].nov);
-                        notfinish.push(jsoutput[i].dec);
+                        all.push(jsoutput[i].jan);
+                        all.push(jsoutput[i].feb);
+                        all.push(jsoutput[i].mar);
+                        all.push(jsoutput[i].apr);
+                        all.push(jsoutput[i].may);
+                        all.push(jsoutput[i].jun);
+                        all.push(jsoutput[i].jul);
+                        all.push(jsoutput[i].aug);
+                        all.push(jsoutput[i].sep);
+                        all.push(jsoutput[i].oct);
+                        all.push(jsoutput[i].nov);
+                        all.push(jsoutput[i].dec);
                     }
                 }
             }
             showChart()
-            console.log(notfinish)
+            console.log(all)
         }
         function showChart() {
             var department = document.getElementById('department').value;
@@ -193,29 +246,279 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
                     datasets: [
                         {
-                            label: 'รายการซ่อมที่เสร็จสิ้น',
-                            data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
-                            backgroundColor: '#32CCD1',
+                            label: "รายการซ่อมทั้งหมด" + department,
+                            data: [all[0], all[1], all[2], all[3], all[4], all[5], all[6], all[7], all[8], all[9], all[10], all[11]],
+                            backgroundColor: '#7E817C'
                         },
                         {
-                            label: 'รายการซ่อมที่ยังไม่เสร็จสิ้น',
-                            data: [notfinish[0], notfinish[1], notfinish[2], notfinish[3], notfinish[4], notfinish[5], notfinish[6], notfinish[7], notfinish[8], notfinish[9], notfinish[10], notfinish[11]],
-                            backgroundColor: '#7E817C',
+                            label: "รายการซ่อมที่เสร็จสิ้น" + department,
+                            data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
+                            backgroundColor: '#32CCD1'
                         }
                     ]
 
                 },
                 options: {
                     scales: {
-                        xAxes: [{ stacked: true }],
-                        yAxes: [{ stacked: true }]
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
                 }
-            });
+            }
+            );
 
+        }
+        function table() {
+            var year = document.getElementById('yearShow').value;
+            department = document.getElementById('department').value;
+            var month = [];
+            detail = [];
+            var empID = [];
+            emp = [];
+            var techID = [];
+            tech = [];
+            dateRP = [];
+            var jan = 0
+            var feb = 0
+            var mar = 0
+            var apr = 0
+            var may = 0
+            var jun = 0
+            var jul = 0
+            var aug = 0
+            var sep = 0
+            var oct = 0
+            var nov = 0
+            var dec = 0
+            var xmlhttp = new XMLHttpRequest();
+            var url = "https://" + IP + ":8443/repairing";
+            if (department !== 'ทุกแผนก') {
+                url = "https://" + IP + ":8443/repairing/department/" + department;
+            }
+            xmlhttp.open("GET", url, false);
+            xmlhttp.send();
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < jsoutput.length; i++) {
+                    detail.push(jsoutput[i].detail);
+                    dateRP.push(jsoutput[i].dateRP);
+                    empID.push(jsoutput[i].employeeID);
+                    techID.push(jsoutput[i].technicainID);
+                    month.push(jsoutput[i].date.substring(5, 7));
+                }
+            }
+
+            var xmlhttp = new XMLHttpRequest();
+            var url1 = "https://" + IP + ":8443/employees";
+            xmlhttp.open("GET", url1, false);
+            xmlhttp.send();
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < empID.length; i++) {
+                    for (let j = 0; j < jsoutput.length; j++) {
+                        if (empID[i] === jsoutput[j].employeeID) {
+                            emp.push(jsoutput[j].firstName + ' ' + jsoutput[j].lastName);
+                        }
+                    }
+                }
+            }
+
+            var xmlhttp = new XMLHttpRequest();
+            var url2 = "https://" + IP + ":8443/technicains";
+            xmlhttp.open("GET", url2, false);
+            xmlhttp.send();
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < techID.length; i++) {
+                    if (techID[i] === null) {
+                        tech.push('ยังไม่มีช่างที่รับผิดชอบ');
+                    }
+                    for (let j = 0; j < jsoutput.length; j++) {
+                        if (techID[i] === jsoutput[j].technicainID) {
+                            tech.push(jsoutput[j].firstName + ' ' + jsoutput[j].lastName);
+                        }
+                    }
+                }
+            }
+
+            for (let i = 0; i < month.length; i++) {
+                if (month[i] === '01') {
+                    jan++
+                } else if (month[i] === '02') {
+                    feb++
+                } else if (month[i] === '03') {
+                    mar++
+                } else if (month[i] === '04') {
+                    apr++
+                } else if (month[i] === '05') {
+                    may++;
+                } else if (month[i] === '06') {
+                    jun++
+                } else if (month[i] === '07') {
+                    jul++
+                } else if (month[i] === '08') {
+                    aug++;
+                } else if (month[i] === '09') {
+                    sep++
+                } else if (month[i] === '10') {
+                    oct++
+                } else if (month[i] === '11') {
+                    nov++
+                } else if (month[i] === '12') {
+                    dec++
+                }
+            }
+
+            document.getElementById('detail').innerHTML = ""
+            for (let i = 0; i < month.length; i++) {
+                if (dateRP[i] === null) {
+                    dateRP[i] = 'ยังไม่ระบุ'
+                }
+                if (month[i] === '01') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + jan + '">มกราคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '02') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + feb + '">กุมภาพันธ์</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '03') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + mar + '">มีนาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '04') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + apr + '">เมษายน</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '05') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + may + '">พฤษภาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '06') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + jun + '">มิถุนายน</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+
+                } else if (month[i] === '07') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + jul + '">กรกฎาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '08') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + aug + '">สิงหาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '09') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + sep + '">กันยายน</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '10') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + oct + '">ตุลาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '11') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + nov + '">พฤศจิกายน</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                } else if (month[i] === '12') {
+                    if (month[i] !== month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<tr><td rowspan="' + dec + '">ธันวาาคม</td>' + '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    } else if (month[i] === month[i - 1]) {
+                        document.getElementById('detail').innerHTML += '<td>' + detail[i] + '</td>' + '<td>' + emp[i] + '</td>' + '<td>' + tech[i] + '</td>' + '<td>' + dateRP[i] + '</td>';
+
+                    }
+                    document.getElementById('detail').innerHTML += '</tr>';
+                }
+            }
+        }
+
+        function createPDF() {
+            var sTable = document.getElementById('tab').innerHTML;
+            var year = document.getElementById('yearShow').value;
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>รายงานการแจ้งซ่อม '+department+' ประจำปี '+year+'</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
         }
     </script>
 
