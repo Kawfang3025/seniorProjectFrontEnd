@@ -495,6 +495,7 @@
                         }
                     }
                 }
+<<<<<<< HEAD
 
                 function createPDF() {
                     var sTable = document.getElementById('tab').innerHTML;
@@ -524,6 +525,39 @@
 
             <script type="text/javascript" src="js/index.js"></script>
             <script type="text/javascript" src="js/sidebar.js"></script>
+=======
+            }
+        }
+
+        function createPDF() {
+            var sTable = document.getElementById('tab').innerHTML;
+            var year = document.getElementById('yearShow').value;
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<h4>รายงานการแจ้งซ่อม '+department+' ประจำปี '+year+'</h>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
+        }
+    </script>
+
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
+>>>>>>> 53bedb1f7b3b5f24df6a40df70bdefb6d5627a32
 </body>
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
