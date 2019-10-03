@@ -10,14 +10,35 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Take Pictures</title>
+    <script>
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            console.log(navigator.camera);
+        }
 
-    <title>SomDai</title>
+    </script>
+    <style>
+        #btn {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            margin: 1rem;
+        }
 
+        #msg {
+            border: 1px solid #eee;
+            padding: 1rem;
+            margin: 1rem;
+        }
+    </style>
 </head>
 
 <body
     style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
-    <nav class="navbar bg-dark  navbar-dark" style="background-color: rgb(10, 6, 43)">
+    <div class="bs-example">
+    <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
         <!-- Toggler/collapsibe Button -->
         <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
             <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
@@ -52,33 +73,22 @@
         <a href="report.html">รายงานการแจ้งซ่อม</a>
         <a href="javascript:logout();">ออกจากระบบ</a>
     </div>
-    <!-- <a name="" id="" class="btn btn-dark rounded-0 top-left mt-2" href="home.html" role="button"> กลับหน้าเมนู</a> -->
-    <div class="container ">
+
+
+    <div class="container">
         <div class="form-group pt-2">
             <label for="exampleFormControlTextarea1">รายละเอียด/อาการชำรุด</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <div class="row">
-            <p class="pr-3 pl-3"><img src="img/picture.png" alt="image" id="photo" style="width: 100% ;" /></p>
-            <p id="msg"></p>
-           
-
-            <button id="takePic"> <img src="img/camera.png" width="50px"
-                    alt="Cinque Terre"></button>
-
-            <!-- <div class="col-8" style="padding-left: 0">
-                <a id="takePic" class="btn btn-primary" style="padding-top: 8px;" role="button">Take picture</a>
-            </div> -->
-        </div>
-    </div>
+        <p class="pr-3 pl-3"><img src="img/picture.png" alt="image" id="photo" style="width: 100% ;" /></p>
+        <p class="center w-100"><button id="btn">Take Picture</button></p>
+        <p id="msg" class="text-truncate " style="width: 80% ;"></p>
+    </div></div>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script>
-         window.onerror = function (msg, url, linenumber) {
-            alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
-            return true;
-        }
-        let apps = {
+        let app = {
             init: function () {
-                document.getElementById('takePic').addEventListener('click', app.takephoto);
+                document.getElementById('btn').addEventListener('click', app.takephoto);
             },
             takephoto: function () {
                 let opts = {
@@ -104,20 +114,19 @@
             }
         };
 
-        document.addEventListener('deviceready', apps.init);
+        document.addEventListener('deviceready', app.init);
     </script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
 
 </html>

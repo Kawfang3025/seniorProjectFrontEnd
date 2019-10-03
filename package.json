@@ -18,7 +18,11 @@
     "cordova-android": "^8.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^5.0.1",
+    "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-local-notification": "git+https://github.com/katzer/cordova-plugin-local-notifications.git",
     "cordova-plugin-splashscreen": "^5.0.3",
     "js-datepicker": "^5.0.0"
   },
@@ -31,6 +35,10 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-dialogs": {},
+      "cordova-plugin-local-notification": {
+        "ANDROID_SUPPORT_V4_VERSION": "26.+"
       }
     },
     "platforms": [

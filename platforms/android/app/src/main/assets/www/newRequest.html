@@ -2,16 +2,18 @@
 <html>
 
 <head>
+     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
     <title>Take Pictures</title>
     <script>
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -36,11 +38,11 @@
 </head>
 
 <body
-    style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+    style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );" >
     <div class="bs-example">
     <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
         <!-- Toggler/collapsibe Button -->
-        <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+        <a id="main" class="m-0" style="color: rgb(255, 255, 255);height: 100%;">
             <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
                     <span>&nbsp;</span>
                     <span>&nbsp;</span>
@@ -54,7 +56,7 @@
         </a>
 
     </nav>
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav mt-5" onclick="closeNav()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="col-8 ">
             <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">

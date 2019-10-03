@@ -3,43 +3,41 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
 
     <title>SomDai</title>
 </head>
 
-<body
-    style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
+<body style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
     <div class="bs-example">
-        <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43); width: 100%;">
+        <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
-            <a id="main" style="color: rgb(255, 255, 255);height: 100%;">
+            <a id="main" class="m-0" style="color: rgb(255, 255, 255);height: 100%;width: 50%">
                 <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
                         <span>&nbsp;</span>
-                        <span>&nbsp;</span>
-                        <span>&nbsp;</span>
-                    </label></span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                </label>
+                </span>
             </a>
 
             <!-- <h4 class="text-light ">SomDai</h4> -->
-            <a class="navbar-brand" href="#" style="right: 0;">
+            <a class="navbar-brand right" href="#">
                 <img src="img/logo.png" alt="logonav" style="width: 60px;">
             </a>
 
         </nav>
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="sidenav mt-5" onclick="closeNav()">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="col-8 ">
                 <img src=" img/profile.png" class="rounded-circle" alt="Cinque Terre" style="width: 100%">
@@ -61,42 +59,59 @@
         <!-- <div id="main">
             <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
           </div> -->
-        <div class="container" style="padding-left: 0%;height: 100%;">
-            <div class="container form-row mt-3" style="width: 100%;">
-                <input class="form-control col" id="myInput" type="text" placeholder="Search..">
-                <select class="form-control col" id="status">
-                    <option value="1">วันที่แจ้งซ่อม</option>
-                    <option value="2">สถานะการดำเนินงาน</option>
-                </select>
-                <a name="" id="" class="btn btn-primary col-2" onclick="selectRepairingByID()" role="button">ยืนยัน</a>
-                <br>
-                <div id="requestlist" class="container req">
-                    <hr>
+        <div class="container-fluid" style="height: 100%;">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs center" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#list">มุมมองรายการ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#table">มุมมองตาราง</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                <!-- มุมมองรายการ -->
+                <div id="list" class="container tab-pane active"><br>
+                    <div id="requestlist"></div>
+                </div>
+
+                <!-- โชว์รายการแจ้งซ่อม -->
+
+
+                <!-- มุมมองตาราง -->
+                <div id="table" class="container tab-pane fade"><br>
+                    <table id="dtBasicExample" class="table table-striped table-hover table-bordered table-sm center" cellspacing="0" width="100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <!-- <th class="th-sm">สถานะ</th> -->
+                                <th class="th-sm " style="width: 25%">ผู้แจ้ง</th>
+                                <th class="th-sm " style="width: 45%">รายละเอียด</th>
+                                <th class="th-sm " style="width: 30%">วันที่แจ้งซ่อม</th>
+                            </tr>
+
+                        </thead>
+                        <tbody id="result">
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 
         </div>
     </div>
     <script>
-        var ID = 0;
+        var ID = '0';
         var department;
         var position;
-        var status = [];
-        var color = [];
-        var employeeID = [];
-        var firstname = [];
-        var lastname = [];
-        var img = [];
-        var detail = [];
-        var date = [];
-        var repairID = [];
+        var url;
         var IP = localStorage.getItem("IP");
 
-        init();
-        selectRepairingByID();
-        selectEmployeeByID();
-        showRepairList();
-        function init() {
+        checkID();
+        // เช็คไอดี ตำแหน่ง แผนก
+        function checkID() {
             var xmlhttp = new XMLHttpRequest();
             var email = localStorage.getItem("email");
             var url1 = "https://" + IP + ":8443/technicains";
@@ -112,7 +127,7 @@
                         department = jsoutput[i].department;
                     }
                 }
-                if (ID === 0) {
+                if (ID === '0') {
                     url2 = "https://" + IP + ":8443/employees";
                     xmlhttp.open("GET", url2, false);
                     xmlhttp.send();
@@ -129,115 +144,129 @@
                 }
             }
             console.log(ID);
+            CheckUrl();
         }
 
-        function selectRepairingByID() {
+        // เช็ค Url ตามตำแหน่ง ปริ้นรายการ
+        function CheckUrl() {
             var xmlhttp = new XMLHttpRequest();
-            var url;
             var pos;
-            var status = document.getElementById('status').value;
             if (department === "Engineering") {
                 if (position === "Supervisor") {
                     pos = "H";
-                    if (status === "2") {
-                        url = "https://" + IP + ":8443/repairing/status";
-                    } else {
-                        url = "https://" + IP + ":8443/repairing";
-                    }
+                    url = "https://" + IP + ":8443/joinemprepair";
                 } else {
                     pos = "E";
-                    if (status === "2") {
-                        url = "https://" + IP + ":8443/repairing/technicain/status/" + ID;
-                    } else {
-                        url = "https://" + IP + ":8443/repairing/technicain/" + ID;
-                    }
+                    url = "https://" + IP + ":8443/joinemprepair/technicain/" + ID;
                 }
             } else {
-                if (status === "2") {
-                    url = "https://" + IP + ":8443/repairing/department/status/" + department;
-                } else {
-                    url = "https://" + IP + ":8443/repairing/department/" + department;
-                }
+                url = "https://" + IP + ":8443/joinemprepair/employee/" + department;
             }
-            console.log(status);
             console.log(url);
-            detail = [];
-            date = [];
-            employeeID = [];
-            repairID = [];
-            xmlhttp.open("GET", url, false);
-            xmlhttp.send();
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                var output = xmlhttp.responseText;
-                var jsoutput = JSON.parse(output);
-                console.log(jsoutput.length);
 
-                for (let i = 0; i < jsoutput.length; i++) {
-                    detail.push(jsoutput[i].detail);
-                    date.push(jsoutput[i].date);
-                    employeeID.push(jsoutput[i].employeeID);
-                    repairID.push(jsoutput[i].repairingID);
-
-                    if (pos === "H") {
-                        if (jsoutput[i].statusHead === "y") {
-                            color.push("green")
-                        } else if (jsoutput[i].statusHead === "n") {
-                            color.push("red")
-                        }
-
-                    } else if (pos === "E") {
-                        if (jsoutput[i].statusTech === "y") {
-                            color.push("green")
-                        } else if (jsoutput[i].statusTech === "n") {
-                            color.push("red")
-                        }
-                    } else {
-                        color.push("white")
-                    }
-                }
-
-                console.log(detail);
-                console.log(date);
-            }
-            showRepairList()
-        }
-        function selectEmployeeByID() {
-            for (let i = 0; i < employeeID.length; i++) {
-                var xmlhttp = new XMLHttpRequest();
-                var url = "https://" + IP + ":8443/employees/employeeID/" + employeeID[i];
+            if (pos === "H") {
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
                 if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var output = xmlhttp.responseText;
                     var jsoutput = JSON.parse(output);
-                    for (let j = 0; j < jsoutput.length; j++) {
-                        firstname.push(jsoutput[j].firstName);
-                        lastname.push(jsoutput[j].lastName);
-                        img.push(jsoutput[j].img);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        document.getElementById('requestlist').innerHTML += '<div class="border border-secondary rounded row pt-3 pb-3 mb-1" onclick="showdetail(`' + jsoutput[i].firstName + '`,`' + jsoutput[i].lastName + '`,`' + jsoutput[i].detail + '`,`' + jsoutput[i].employeeID + '`,`' + jsoutput[i].repairingID + '`)"  class="row"><i class="fas fa-circle ml-1 " style="color:' + checkColor(jsoutput[i].statusHead) + '"></i>' +
+                            '<img src="img/picpro.jpg" class="col-2 rounded-circle pl-0 pr-0" width="100%">' +
+                            '<div  class="col-10 row">' +
+                            '<a class="col-7 text-truncate" style="font-weight:bold" >' + jsoutput[i].firstName + " " + jsoutput[i].lastName + '</a>' +
+                            '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
+                            '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
+                            '</div> </div></div>';
+
+                        var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
+                        var detail = jsoutput[i].detail;
+                        var date = jsoutput[i].date;
+                        console.log(i);
+
+                        document.getElementById("result").innerHTML += '<tr >' +
+                            // "<td>" + status + "</td>" +
+                            '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
+                            '<td class"text-truncate" style="width: 45%">' + detail + "</td>" +
+                            '<td class"text-truncate" style="width: 30%">' + date + "</td>" +
+                            "</tr>"
                     }
                 }
+            } else if (pos === "E") {
+                xmlhttp.open("GET", url, false);
+                xmlhttp.send();
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    var output = xmlhttp.responseText;
+                    var jsoutput = JSON.parse(output);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        document.getElementById('requestlist').innerHTML += '<div class="border border-secondary rounded row pt-3 pb-3 mb-1" onclick="showdetail(`' + jsoutput[i].firstName + '`,`' + jsoutput[i].lastName + '`,`' + jsoutput[i].detail + '`,`' + jsoutput[i].employeeID + '`,`' + jsoutput[i].repairingID + '`)"  class="row"><i class="fas fa-circle ml-1 " style="color:' + checkColor(jsoutput[i].statusTech) + '"></i>' +
+                            '<img src="img/picpro.jpg" class="col-2 rounded-circle pl-0 pr-0" width="100%">' +
+                            '<div  class="col-10 row">' +
+                            '<a class="col-7 text-truncate" style="font-weight:bold" >' + jsoutput[i].firstName + " " + jsoutput[i].lastName + '</a>' +
+                            '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
+                            '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
+                            '</div> </div></div>';
+
+                        var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
+                        var detail = jsoutput[i].detail;
+                        var date = jsoutput[i].date;
+                        console.log(i);
+
+                        document.getElementById("result").innerHTML += '<tr >' +
+                            // "<td>" + status + "</td>" +
+                            '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
+                            '<td class"text-truncate" style="width: 45%">' + detail + "</td>" +
+                            '<td class"text-truncate" style="width: 30%">' + date + "</td>" +
+                            "</tr>"
+                    }
+                }
+            } else {
+                xmlhttp.open("GET", url, false);
+                xmlhttp.send();
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    var output = xmlhttp.responseText;
+                    var jsoutput = JSON.parse(output);
+                    for (let i = 0; i < jsoutput.length; i++) {
+                        document.getElementById('requestlist').innerHTML += '<div class="border border-secondary rounded row pt-3 pb-3 mb-1" onclick="showdetail(`' + jsoutput[i].firstName + '`,`' + jsoutput[i].lastName + '`,`' + jsoutput[i].detail + '`,`' + jsoutput[i].employeeID + '`,`' + jsoutput[i].repairingID + '`)"  class="row">' +
+                            '<img src="img/picpro.jpg" class="col-2 rounded-circle pl-0 pr-0" width="100%">' +
+                            '<div  class="col-10 row">' +
+                            '<a class="col-7 text-truncate" style="font-weight:bold" >' + jsoutput[i].firstName + " " + jsoutput[i].lastName + '</a>' +
+                            '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
+                            '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
+                            '</div> </div></div>';
+
+                        var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
+                        var detail = jsoutput[i].detail;
+                        var date = jsoutput[i].date;
+                        console.log(i);
+
+                        document.getElementById("result").innerHTML += '<tr >' +
+                            // "<td>" + status + "</td>" +
+                            '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
+                            '<td class"text-truncate" style="width: 45%">' + detail + "</td>" +
+                            '<td class"text-truncate" style="width: 30%">' + date + "</td>" +
+                            "</tr>"
+                    }
+                }
+
             }
-            console.log(employeeID);
-            console.log(firstname);
-            console.log(lastname);
+            $(document).ready(function() {
+                $('#dtBasicExample').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
         }
 
-        function showRepairList() {
-            document.getElementById('requestlist').innerHTML = "<hr>";
-            for (let i = 0; i < detail.length; i++) {
-                document.getElementById('requestlist').innerHTML += '<div onclick="showdetail(`' + firstname[i] + '`,`' + lastname[i] + '`,`' + detail[i] + '`,`' + employeeID[i] + '`,`' + repairID[i] + '`)"  class="row"><hr><i class="fas fa-circle ml-1 " style="color:' + color[i] + '"></i>' +
-                    '<img src="img/picpro.jpg" class="col-2 rounded-circle pl-0 pr-0" width="100%">' +
-                    '<div  class="col-10 row">' +
-                    '<a class="col-7 text-truncate" style="font-weight:bold" >' + firstname[i] + " " + lastname[i] + '</a>' +
-                    '<a class="col-5" style="font-weight:bold;">' + date[i] + '</a>' +
-                    '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + detail[i] + '</a>' +
-                    '</div> </div></div><hr>';
+        // เช็คสี
+        function checkColor(status) {
+            if (status === "y") {
+                return "green";
+            } else if (status === "n") {
+                return "red";
             }
-
         }
 
+        // คลิ๊กเพื่อดูรายละเอียด
         function showdetail(firstname, lastname, detail, empID, repairID) {
-
             var xmlhttp = new XMLHttpRequest();
             var url;
             if (department === "Engineering") {
@@ -256,29 +285,14 @@
             localStorage.setItem('empID', empID);
             window.location.href = 'requestdetail.html';
         }
-
-        // $(document).ready(function () {
-        //     $("#myInput").on("keyup", function () {
-        //         var value = $(this).val();
-        //         $("#requestlist").filter(function () {
-        //             $(this).toggle($(this).text())
-        //         });
-        //     });
-        // });
+        localStorage.setItem("department", department);
+        localStorage.setItem("ID", ID);
     </script>
+
+
 
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
 
 </html>
