@@ -1,76 +1,90 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Convert Table to PDF using JavaScript</title>
-    <style>
-        table
-        {
-            width: 300px;
-            font: 17px Calibri;
-        }
-        table, th, td 
-        {
-            border: solid 1px #DDD;
-            border-collapse: collapse;
-            padding: 2px 3px;
-            text-align: center;
-        }
-    </style>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+    <title>Hello world</title>
 </head>
+
 <body>
-    <div id="tab">
-        <table> 
-            <tr>
-                <th>Name</th>
-                    <th>Age</th>
-                        <th>Job</th>
-            </tr>
-            <tr>
-                <td>Brian</td>
-                    <td>41</td>
-                        <td>Blogger</td>
-            </tr>
-            <tr>
-                <td>Matt</td>
-                    <td>25</td>
-                        <td>Programmer</td>
-            </tr>
-            <tr>
-                <td>Arun</td>
-                    <td>39</td>
-                        <td>Writter</td>
-            </tr>
-        </table>
+    <h1>Hello world</h1>
+    <div>
+        <canvas id="myChart" width="600" height="300"></canvas>
     </div>
 
-    <p>
-        <input type="button" value="Create PDF" 
-            id="btPrint" onclick="createPDF()" />
-    </p>
+    <div style="height:0; width:0; overflow:hidden;">
+        <canvas id="supermyChart" width="1200" height="600"></canvas>
+    </div>
+    
+    <script type="text/javascript">
+        // var ctx = document.getElementById('myChart').getContext('2d');
+
+        var chart_data = {
+            labels: ['Player1', 'Player2', 'Player3', 'Player4'],
+            datasets: [
+                {
+                    fillColor: "rgba(6, 118, 152, 0.71)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [20, 34, 15, 64,]
+                }
+            ]
+        }
+
+        var canvasImg = chart_data.toBase64Image();
+
+        //original canvas
+        var canvas = document.querySelector('#myChart');
+        var context = canvas.getContext('2d');
+
+        // new Chart(context).Line(chart_data);
+        new Chart(context, {
+            type: "line",
+            data: chart_data,
+        });
+
+        //hidden canvas
+        var newCanvas = document.querySelector('#supermyChart');
+        newContext = newCanvas.getContext('2d');
+
+        // var supercoolcanvas = new Chart(newContext).Line(chart_data);
+        var supercoolcanvas = new Chart(newContext, {
+            type: "line",
+            data: chart_data,
+        });
+        // supercoolcanvas.defaults.global = {
+        //     scaleFontSize: 600
+        // }
+
+
+        var canvas = document.querySelector('#supermyChart');
+        console.log(canvas)
+        //creates image
+        var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
+        //  var canvasImg = myChart.toBase64Image();
+         console.log(canvasImg);
+         
+
+        //var imgData = 'data:image/jpeg;base64,/'+canvasImg
+
+        //creates PDF from img
+        var doc = new jsPDF('portrait');
+        doc.setFontSize(20);
+        doc.text(15, 15, "Cool Chart");
+        doc.addImage(canvasImg, 'JPEG', 10, 10, 100, 70);
+        doc.save('canvas.pdf');
+        // console.log(canvasImg)
+        // var pdf = new jsPDF();
+        // pdf.setFontSize(40)
+        // pdf.text(30, 30, 'Hello world!');
+        // pdf.addImage(canvasImg, 'PNG', 15, 40, 180, 160)
+        // pdf.save('hello_world.pdf');
+    </script>
 </body>
-<script>
-    function createPDF() {
-        var sTable = document.getElementById('tab').innerHTML;
 
-        var style = "<style>";
-        style = style + "table {width: 100%;font: 17px Calibri;}";
-        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
-        style = style + "padding: 2px 3px;text-align: center;}";
-        style = style + "</style>";
-
-        // CREATE A WINDOW OBJECT.
-        var win = window.open('', '', 'height=700,width=700');
-
-        win.document.write('<html><head>');
-        win.document.write('<title>รายงานการแจ้งซ่อม</title>');   // <title> FOR PDF HEADER.
-        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
-        win.document.write('</head>');
-        win.document.write('<body>');
-        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
-        win.document.write('</body></html>');
-
-        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
-
-        win.print();    // PRINT THE CONTENTS.
-    }
-</script>
 </html>
