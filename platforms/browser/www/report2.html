@@ -2,6 +2,7 @@
 <html>
 
 <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -78,10 +79,12 @@
                 </select>
                 <a name="" id="" class="btn btn-primary " onclick="finishdata()+table()" role="button">ยืนยัน</a>
                 <p>
-                    <button id="exportButton" type="button">Export as PDF</button>
+                    <button id="exportButton" type="button">Export Graph as PDF</button>
+                    <button id="" type="button" onclick="createPDF()">Export Table as PDF</button>
                 </p>
             </div>
             <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+            <br><br>
             <div id="tab">
                 <table class="table table-bordered">
                     <thead>
@@ -213,10 +216,11 @@
         }
         function showChart() {
             var department = document.getElementById('department').value;
+            var year = document.getElementById('yearShow').value;
             var chart = new CanvasJS.Chart("chartContainer",
                 {
                     title: {
-                        text: "รายงานการแจ้งซ่อม" + department
+                        text: "รายงานการแจ้งซ่อม" + department+" ประจำปี "+ year
                     }, axisY: {
                         title: "จำนวนการแจ้งซ่อม(ครั้ง)"
                     }, axisX: {
@@ -225,7 +229,7 @@
                     data: [{
                         type: "column",
                         showInLegend: true,
-                        name: "Gold",
+                        name: "รายการซ่อมทั้งหมด"+department,
                         color: "#7E817C",
                         dataPoints: [
                             { y: parseInt(all[0], 10), label: "ม.ค." },
@@ -245,7 +249,7 @@
                     {
                         type: "column",
                         showInLegend: true,
-                        name: "Silver",
+                        name: "รายการซ่อมที่เสร็จสิ้น"+department,
                         color: "#32CCD1",
                         dataPoints: [
                             { y: parseInt(finish[0], 10), label: "ม.ค." },
@@ -459,52 +463,44 @@
             }
         }
 
-        //  function createPDF() {
-        //     var sTable = document.getElementById('tab').innerHTML;
-        //     var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
-        //     var dataURL = canvas.toDataURL();
-        //     console.log(dataURL)
-        //     var year = document.getElementById('yearShow').value;
-        //     var style = "<style>";
-        //     style = style + "table {width: 100%;font: 17px Calibri;}";
-        //     style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
-        //     style = style + "padding: 2px 3px;text-align: center;}";
-        //     style = style + "</style>";
-        //     // CREATE A WINDOW OBJECT.
-        //     var win = window.open('', '', 'height=700,width=700');
-        //     win.document.write('<html><head>');
-        //     win.document.write('<title>รายงานการแจ้งซ่อม ' + department + ' ประจำปี ' + year + '</title>'); // <title> FOR PDF HEADER.
-        //     win.document.write(style); // ADD STYLE INSIDE THE HEAD TAG.
-        //     win.document.write('</head>');
-        //     win.document.write('<body>');
-        //     win.document.write("<img src='" + dataURL + "'/>");
-        //     win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
-        //     win.document.write('</body></html>');
-        //     win.document.close(); // CLOSE THE CURRENT WINDOW.
-        //     win.print(); // PRINT THE CONTENTS.
-        // }
+         function createPDF() {
+            var sTable = document.getElementById('tab').innerHTML;
+            var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
+            var dataURL = canvas.toDataURL();
+            console.log(dataURL)
+            var year = document.getElementById('yearShow').value;
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write('<html><head>');
+            win.document.write('<title>รายงานการแจ้งซ่อม ' + department + ' ประจำปี ' + year + '</title>'); // <title> FOR PDF HEADER.
+            win.document.write(style); // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write("<img src='" + dataURL + "'/>");
+            win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+            win.document.close(); // CLOSE THE CURRENT WINDOW.
+            win.print(); // PRINT THE CONTENTS.
+        }
         // var sTable = document.getElementById('tab').value;
         // console.log(sTable);
 
 
 
+        var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
+        var dataURL = canvas.toDataURL();
+        console.log("i:" + dataURL);
         $("#exportButton").click(function () {
-            var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
-            var dataURL = canvas.toDataURL();
-            var pdf;
-            html2canvas(document.getElementById("tab"), {
-                onrendered: function (canvas1) {
-                    var img = canvas1.toDataURL("image/png");
-                    pdf = new jsPDF();
-                    pdf.addImage(img, 'JPEG', 20, 20);
-                    pdf.addPage();
-                    pdf.addImage(dataURL, 'PNG', 15, 40, 180, 180);
-                    pdf.save("download.pdf");
-                }
-            });
-
-
-            // pdf.text(20,40,"Hello world")
+            var pdf = new jsPDF("lanscape");
+            //pdf.text(35, 25, "Octonyan loves jsPDF");
+          //pdf.fromHTML($("#tab")[0],20,30)
+            pdf.addImage(dataURL, 'PNG', 15, 40,190,130);
+            pdf.save("download.pdf");
         });
 
     </script>
