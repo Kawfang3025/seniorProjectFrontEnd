@@ -1,91 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <title>Hello world</title>
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
-        <div>
-                <canvas id="cool-canvas" width="600" height="300"></canvas>
-              </div>
-              
-              <div style="height:0; width:0; overflow:hidden;">
-                <canvas id="supercool-canvas" width="1200" height="600"></canvas>
-              </div>
-              
-              <button type="button" id="download-pdf" >
-                Download PDF
-              </button>
-              
-              <button type="button" id="download-pdf2" >
-                Download Higher Quality PDF
-              </button>
-    <script type="text/javascript">
-    var chart_data = {
-         labels: ['Player1', 'Player2', 'Player3', 'Player4'],
-         datasets: [
-             {
-                 fillColor: "rgba(6, 118, 152, 0.71)",
-                 strokeColor: "rgba(220,220,220,1)",
-                 pointColor: "rgba(220,220,220,1)",
-                 pointStrokeColor: "#fff",
-                 pointHighlightFill: "#fff",
-                 pointHighlightStroke: "rgba(220,220,220,1)",
-                 data: [20,34,15,64,]
-             }
-         ]    
-}
+    <div id="chartContainer" style="height: 360px; width: 100%;"></div>
 
-//original canvas
-var canvas = document.querySelector('#cool-canvas');
-var context = canvas.getContext('2d');
+    <button id="exportButton" type="button">Export as PDF</button>
+    <script>
+        var d = [1,2,3,4,5,6,7,8,9,10,11,12]
+        var c = []
+        c.push(10)
+        console.log(c[0]+1)
+        a()
+        function a() {
+            var chart = new CanvasJS.Chart("chartContainer",
+                {
+                    title: {
+                        text: "Exporting chart using jsPDF & toDataurl"
+                    },axisY: {
+		title: "จำนวนการแจ้งซ่อม(ครั้ง)"
+	},
 
-new Chart(context).Line(chart_data);
-
-//hidden canvas
-var newCanvas = document.querySelector('#supercool-canvas');
-newContext = newCanvas.getContext('2d');
-
-var supercoolcanvas = new Chart(newContext).Line(chart_data);
-supercoolcanvas.defaults.global = {
-	scaleFontSize: 600
-}
-
-//add event listener to button
-document.getElementById('download-pdf').addEventListener("click", downloadPDF);
-
-//donwload pdf from original canvas
-function downloadPDF() {
-  var canvas = document.querySelector('#cool-canvas');
-	//creates image
-	var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
-  
-	//creates PDF from img
-	var doc = new jsPDF('landscape');
-	doc.setFontSize(20);
-	doc.text(15, 15, "Cool Chart");
-	doc.addImage(canvasImg, 'JPEG', 10, 10, 280, 150 );
-	doc.save('canvas.pdf');
-}
-
-//add event listener to 2nd button
-document.getElementById('download-pdf2').addEventListener("click", downloadPDF2);
-
-//download pdf form hidden canvas
-function downloadPDF2() {
-	var newCanvas = document.querySelector('#supercool-canvas');
-
-  //create image from dummy canvas
-	var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
-  
-  	//creates PDF from img
-	var doc = new jsPDF('landscape');
-	doc.setFontSize(20);
-	doc.text(15, 15, "Super Cool Chart");
-	doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150 );
-	doc.save('new-canvas.pdf');
- }
+                    data: [{
+                        type: "column",
+                        showInLegend: true,
+                        name: "Gold",
+                        color: "#7E817C",
+                        dataPoints: [
+                            { y: c[0], label: "ม.ค." },
+                            { y: d[1], label: "ก.พ." },
+                            { y: d[2], label: "มี.ค." },
+                            { y: d[3], label: "เม.ย." },
+                            { y: d[4], label: "พ.ค." },
+                            { y: d[5], label: "Russia" },
+                            { y: d[6], label: "USA" },
+                            { y: d[11], label: "ม.ค." },
+                            { y: d[10], label: "ก.พ." },
+                            { y: d[9], label: "มี.ค." },
+                            { y: d[8], label: "เม.ย." },
+                            { y: d[7], label: "พ.ค." },
+                            { y: d[6], label: "Russia" },
+                            { y: 200, label: "USA" }
+                        ]
+                    },
+                    {
+                        type: "column",
+                        showInLegend: true,
+                        name: "Silver",
+                        color: "#7E817C",
+                        dataPoints: [
+                            { y: 0, label: "ม.ค." },
+                            { y: d[10], label: "ก.พ." },
+                            { y: d[9], label: "มี.ค." },
+                            { y: d[8], label: "เม.ย." },
+                            { y: d[7], label: "พ.ค." },
+                            { y: d[6], label: "Russia" },
+                            { y: 0, label: "USA" },
+                            { y: d[11], label: "ม.ค." },
+                            { y: d[10], label: "ก.พ." },
+                            { y: d[9], label: "มี.ค." },
+                            { y: d[8], label: "เม.ย." },
+                            { y: d[7], label: "พ.ค." },
+                            { y: d[6], label: "Russia" },
+                            { y: 200, label: "USA" }
+                        ]
+                    }]
+                });
+            chart.render();
+        }
+        var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
+        var dataURL = canvas.toDataURL();
+        console.log("i:" + dataURL);
+        $("#exportButton").click(function () {
+            var pdf = new jsPDF();
+            pdf.text(35, 25, "Octonyan loves jsPDF");
+            pdf.addImage(dataURL, 'PNG', 15, 40, 180, 180);
+            //pdf.addImage(dataURL, 'JPEG', 0, 0);
+            pdf.save("download.pdf");
+        });
     </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
