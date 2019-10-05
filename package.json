@@ -24,6 +24,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-local-notification": "git+https://github.com/katzer/cordova-plugin-local-notifications.git",
     "cordova-plugin-splashscreen": "^5.0.3",
+    "gradle": "^1.0.9",
     "js-datepicker": "^5.0.0"
   },
   "devDependencies": {
