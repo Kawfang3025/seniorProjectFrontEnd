@@ -109,14 +109,31 @@
             ftw: function(imgURI) {
                 document.getElementById('msg').textContent = imgURI;
                 document.getElementById('photo').src = imgURI;
+                console.log(imgURI);
+
 
             },
             wtf: function(msg) {
                 document.getElementById('msg').textContent = msg;
+                console.log(msg);
+
             }
         };
 
         document.addEventListener('deviceready', app.init);
+
+        function uploadFile() {
+
+            var form = document.getElementById('photo');
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            // Add any event handlers here...
+            var url = "http://localhost:8080/upload";
+            xhr.open('POST', url, true);
+            xhr.send(formData);
+
+
+        }
 
 
         function insertRepair() {
