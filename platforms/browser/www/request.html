@@ -54,6 +54,7 @@
             <a href="request.html">หน้าหลัก</a>
             <a href="newRequest.html">แจ้งซ่อม</a>
             <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="editproflie.html">แก้ไขข้อมูลส่วนตัว</a>
             <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
         <!-- <div id="main">
@@ -108,7 +109,6 @@
         var position;
         var url;
         var IP = localStorage.getItem("IP");
-
         checkID();
         // เช็คไอดี ตำแหน่ง แผนก
         function checkID() {
@@ -146,7 +146,6 @@
             console.log(ID);
             CheckUrl();
         }
-
         // เช็ค Url ตามตำแหน่ง ปริ้นรายการ
         function CheckUrl() {
             var xmlhttp = new XMLHttpRequest();
@@ -163,7 +162,6 @@
                 url = "https://" + IP + ":8443/joinemprepair/employee/" + department;
             }
             console.log(url);
-
             if (pos === "H") {
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
@@ -178,12 +176,10 @@
                             '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
                             '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
                             '</div> </div></div>';
-
                         var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
                         var detail = jsoutput[i].detail;
                         var date = jsoutput[i].date;
                         console.log(i);
-
                         document.getElementById("result").innerHTML += '<tr >' +
                             // "<td>" + status + "</td>" +
                             '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
@@ -206,12 +202,10 @@
                             '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
                             '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
                             '</div> </div></div>';
-
                         var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
                         var detail = jsoutput[i].detail;
                         var date = jsoutput[i].date;
                         console.log(i);
-
                         document.getElementById("result").innerHTML += '<tr >' +
                             // "<td>" + status + "</td>" +
                             '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
@@ -234,12 +228,10 @@
                             '<a class="col-5" style="font-weight:bold;">' + jsoutput[i].date + '</a>' +
                             '<a class="col-12 text-truncate" style="font-weight:bold;color: blue;">' + jsoutput[i].detail + '</a>' +
                             '</div> </div></div>';
-
                         var name = jsoutput[i].firstName + " " + jsoutput[i].lastName;
                         var detail = jsoutput[i].detail;
                         var date = jsoutput[i].date;
                         console.log(i);
-
                         document.getElementById("result").innerHTML += '<tr >' +
                             // "<td>" + status + "</td>" +
                             '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
@@ -248,14 +240,12 @@
                             "</tr>"
                     }
                 }
-
             }
             $(document).ready(function() {
                 $('#dtBasicExample').DataTable();
                 $('.dataTables_length').addClass('bs-select');
             });
         }
-
         // เช็คสี
         function checkColor(status) {
             if (status === "y") {
@@ -264,7 +254,6 @@
                 return "red";
             }
         }
-
         // คลิ๊กเพื่อดูรายละเอียด
         function showdetail(firstname, lastname, detail, empID, repairID) {
             var xmlhttp = new XMLHttpRequest();
@@ -283,6 +272,8 @@
             localStorage.setItem('lastrp', lastname);
             localStorage.setItem('detailrp', detail);
             localStorage.setItem('empID', empID);
+            localStorage.setItem('department', department);
+            
             window.location.href = 'requestdetail.html';
         }
         localStorage.setItem("department", department);
