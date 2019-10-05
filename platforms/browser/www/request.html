@@ -74,7 +74,7 @@
             <div class="tab-content">
 
                 <!-- มุมมองรายการ -->
-                <div id="list" class="container tab-pane fade show active"><br>
+                <div id="list" class="container tab-pane active  " style="height: 100%"><br>
                     <div id="requestlist"></div>
                 </div>
 
@@ -82,7 +82,7 @@
 
 
                 <!-- มุมมองตาราง -->
-                <div id="table" class="container tab-pane  active"><br>
+                <div id="table" class="container tab-pane   " style="height: 100%"><br>
                     <table id="dtBasicExample" class="table table-striped table-hover table-bordered table-sm center" cellspacing="0" width="100%">
                         <thead class="thead-dark">
                             <tr>
@@ -273,7 +273,7 @@
             localStorage.setItem('detailrp', detail);
             localStorage.setItem('empID', empID);
             localStorage.setItem('department', department);
-            
+
             window.location.href = 'requestdetail.html';
         }
         localStorage.setItem("department", department);
