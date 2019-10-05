@@ -53,7 +53,8 @@
             </div>
             <a href="request.html">หน้าหลัก</a>
             <a href="newRequest.html">แจ้งซ่อม</a>
-            <a href="report2.html">รายงานการแจ้งซ่อม</a>
+            <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="editproflie.html">แก้ไขข้อมูลส่วนตัว</a>
             <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
         <!-- <div id="main">
@@ -271,6 +272,8 @@
             localStorage.setItem('lastrp', lastname);
             localStorage.setItem('detailrp', detail);
             localStorage.setItem('empID', empID);
+            localStorage.setItem('department', department);
+            
             window.location.href = 'requestdetail.html';
         }
         localStorage.setItem("department", department);

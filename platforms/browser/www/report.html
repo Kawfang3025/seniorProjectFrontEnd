@@ -2,17 +2,20 @@
 <html>
 
 <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript" src="js/html2canvas.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
     <title>SomDai</title>
 </head>
 
@@ -53,6 +56,7 @@
             <a href="request.html">หน้าหลัก</a>
             <a href="newRequest.html">แจ้งซ่อม</a>
             <a href="report.html">รายงานการแจ้งซ่อม</a>
+            <a href="editproflie.html">แก้ไขข้อมูลส่วนตัว</a>
             <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
         <div class="container ">
@@ -76,10 +80,12 @@
                 </select>
                 <a name="" id="" class="btn btn-primary " onclick="finishdata()+table()" role="button">ยืนยัน</a>
                 <p>
-                    <input type="button" value="Create PDF" id="btPrint" onclick="createPDF()" />
+                    <button id="exportButton" type="button">Export Graph as PDF</button>
+                    <button id="" type="button" onclick="createPDF()">Export Table as PDF</button>
                 </p>
             </div>
-            <canvas id="myChart"></canvas>
+            <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+            <br><br>
             <div id="tab">
                 <table class="table table-bordered">
                     <thead>
@@ -100,7 +106,7 @@
     <script>
         var IP = localStorage.getItem("IP");
         var year = [];
-        var finish = [];
+        let finish = [];
         var all = [];
         var detail = [];
         var emp = [];
@@ -152,7 +158,6 @@
                 for (let i = 0; i < jsoutput.length; i++) {
                     console.log("get " + year);
                     if (jsoutput[i].year === year) {
-                        console.log(xmlhttp.status);
                         finish.push(jsoutput[i].jan);
                         finish.push(jsoutput[i].feb);
                         finish.push(jsoutput[i].mar);
@@ -212,31 +217,59 @@
         }
         function showChart() {
             var department = document.getElementById('department').value;
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
-                    datasets: [{
-                        label: "รายการซ่อมทั้งหมด" + department,
-                        data: [all[0], all[1], all[2], all[3], all[4], all[5], all[6], all[7], all[8], all[9], all[10], all[11]],
-                        backgroundColor: '#7E817C'
-                    }, {
-                        label: "รายการซ่อมที่เสร็จสิ้น" + department,
-                        data: [finish[0], finish[1], finish[2], finish[3], finish[4], finish[5], finish[6], finish[7], finish[8], finish[9], finish[10], finish[11]],
-                        backgroundColor: '#32CCD1'
+            var year = document.getElementById('yearShow').value;
+            var chart = new CanvasJS.Chart("chartContainer",
+                {
+                    title: {
+                        text: "รายงานการแจ้งซ่อม" + department+" ประจำปี "+ year
+                    }, axisY: {
+                        title: "จำนวนการแจ้งซ่อม(ครั้ง)"
+                    }, axisX: {
+                        title: "เดือน"
+                    },
+                    data: [{
+                        type: "column",
+                        showInLegend: true,
+                        name: "รายการซ่อมทั้งหมด"+department,
+                        color: "#7E817C",
+                        dataPoints: [
+                            { y: parseInt(all[0], 10), label: "ม.ค." },
+                            { y: parseInt(all[1], 10), label: "ก.พ." },
+                            { y: parseInt(all[2], 10), label: "มี.ค." },
+                            { y: parseInt(all[3], 10), label: "เม.ย." },
+                            { y: parseInt(all[4], 10), label: "พ.ค." },
+                            { y: parseInt(all[5], 10), label: "มิ.ย." },
+                            { y: parseInt(all[6], 10), label: "ก.ค." },
+                            { y: parseInt(all[7], 10), label: "ส.ค." },
+                            { y: parseInt(all[8], 10), label: "ก.ย." },
+                            { y: parseInt(all[9], 10), label: "ต.ค." },
+                            { y: parseInt(all[10], 10), label: "พ.ย." },
+                            { y: parseInt(all[11], 10), label: "ธ.ค." }
+                        ]
+                    },
+                    {
+                        type: "column",
+                        showInLegend: true,
+                        name: "รายการซ่อมที่เสร็จสิ้น"+department,
+                        color: "#32CCD1",
+                        dataPoints: [
+                            { y: parseInt(finish[0], 10), label: "ม.ค." },
+                            { y: parseInt(finish[1], 10), label: "ก.พ." },
+                            { y: parseInt(finish[2], 10), label: "มี.ค." },
+                            { y: parseInt(finish[3], 10), label: "เม.ย." },
+                            { y: parseInt(finish[4], 10), label: "พ.ค." },
+                            { y: parseInt(finish[5], 10), label: "มิ.ย." },
+                            { y: parseInt(finish[6], 10), label: "ก.ค." },
+                            { y: parseInt(finish[7], 10), label: "ส.ค." },
+                            { y: parseInt(finish[8], 10), label: "ก.ย." },
+                            { y: parseInt(finish[9], 10), label: "ต.ค." },
+                            { y: parseInt(finish[10], 10), label: "พ.ย." },
+                            { y: parseInt(finish[11], 10), label: "ธ.ค." }
+                        ]
                     }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
+                });
+            chart.render();
+            console.log("f: " + (finish[7] + 2))
         }
         function table() {
             var year = document.getElementById('yearShow').value;
@@ -431,8 +464,9 @@
             }
         }
 
-        function createPDF() {
+         function createPDF() {
             var sTable = document.getElementById('tab').innerHTML;
+            console.log(dataURL)
             var year = document.getElementById('yearShow').value;
             var style = "<style>";
             style = style + "table {width: 100%;font: 17px Calibri;}";
@@ -451,6 +485,21 @@
             win.document.close(); // CLOSE THE CURRENT WINDOW.
             win.print(); // PRINT THE CONTENTS.
         }
+        
+
+
+
+        var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
+        var dataURL = canvas.toDataURL();
+        console.log("i:" + dataURL);
+        $("#exportButton").click(function () {
+            var pdf = new jsPDF("lanscape");
+            //pdf.text(35, 25, "Octonyan loves jsPDF");
+          //pdf.fromHTML($("#tab")[0],20,30)
+            pdf.addImage(dataURL, 'PNG', 15, 40,190,130);
+            pdf.save("graph.pdf");
+        });
+
     </script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
