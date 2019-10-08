@@ -11,13 +11,14 @@
     <title>SomDai</title>
 
     <script>
-        localStorage.setItem("IP", "192.168.1.50");
+        localStorage.setItem("IP", "172.26.251.142");
         var IP = localStorage.getItem("IP");
         window.onerror = function(msg, url, linenumber) {
             alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
             return true;
         }
         setTimeout(getData, 2000);
+
         function getData() {
             var cogniEmail = localStorage.getItem("email");
             if (cogniEmail === null) {
@@ -52,7 +53,7 @@
                     }
                 }
             }
-            
+
         }
     </script>
     <script type="text/javascript" src="cordova.js"></script>

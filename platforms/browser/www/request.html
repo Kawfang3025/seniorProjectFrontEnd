@@ -180,7 +180,7 @@
                         var detail = jsoutput[i].detail;
                         var date = jsoutput[i].date;
                         console.log(i);
-                        document.getElementById("result").innerHTML += '<tr >' +
+                        document.getElementById("result").innerHTML += '<tr onclick="showdetail(`' + jsoutput[i].firstName + '`,`' + jsoutput[i].lastName + '`,`' + jsoutput[i].detail + '`,`' + jsoutput[i].employeeID + '`,`' + jsoutput[i].repairingID + '`)" >' +
                             // "<td>" + status + "</td>" +
                             '<td class"text-truncate" style="width: 25%">' + name + '</td>' +
                             '<td class"text-truncate" style="width: 45%">' + detail + "</td>" +

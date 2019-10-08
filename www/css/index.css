@@ -185,7 +185,7 @@ html {
     position: absolute;
     height: 170px;
     width: 170px;
-    top: 75px;
+    top: -75px;
     border-radius: 50%;
     background-image: radial-gradient( circle 404px at 4.8% 3.8%, rgba(57, 212, 190, 1) 7.2%, rgba(38, 168, 139, 1) 80.1%);
     padding: 10px;
