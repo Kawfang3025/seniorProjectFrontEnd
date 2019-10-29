@@ -4,9 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
@@ -14,19 +16,21 @@
     <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script type="text/javascript" src="js/html2canvas.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+    
     <title>SomDai</title>
 </head>
 
-<body style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+<body
+    style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
             <a id="main" class="m-0" style="color: rgb(255, 255, 255);height: 100%;width: 50%">
                 <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
                         <span>&nbsp;</span>
-                <span>&nbsp;</span>
-                <span>&nbsp;</span>
-                </label>
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                    </label>
                 </span>
             </a>
 
@@ -77,8 +81,7 @@
                 </select>
                 <a name="" id="" class="btn btn-primary " onclick="finishdata()+table()" role="button">ยืนยัน</a>
                 <p>
-                    <button id="exportButton" type="button">Export Graph as PDF</button>
-                    <button id="" type="button" onclick="createPDF()">Export Table as PDF</button>
+                    <button id="" type="button" onclick="createPDF()">Export as PDF</button>
                 </p>
             </div>
             <div id="chartContainer" style="height: 360px; width: 100%;"></div>
@@ -130,7 +133,7 @@
                 year = [...new Set(year)];
             }
             for (let i = 0; i < year.length; i++) {
-                year.sort(function(a, b) {
+                year.sort(function (a, b) {
                     return b - a
                 });
                 document.getElementById('yearShow').innerHTML += '<option value="' + year[i] + '">' + year[i] + '</option>`';
@@ -513,6 +516,8 @@
         }
 
         function createPDF() {
+            var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
+            var dataURL = canvas.toDataURL();
             var sTable = document.getElementById('tab').innerHTML;
             console.log(dataURL)
             var year = document.getElementById('yearShow').value;
@@ -524,26 +529,18 @@
             // CREATE A WINDOW OBJECT.
             var win = window.open('', '', 'height=700,width=700');
             win.document.write('<html><head>');
-            win.document.write('<title>รายงานการแจ้งซ่อม ' + department + ' ประจำปี ' + year + '</title>'); // <title> FOR PDF HEADER.
+            win.document.write('<title>รายงานการแจ้งซ่อม</title>'); // <title> FOR PDF HEADER.
             win.document.write(style); // ADD STYLE INSIDE THE HEAD TAG.
             win.document.write('</head>');
             win.document.write('<body>');
+            win.document.write('<img src="' + dataURL + '" alt="Red dot" />');
+            win.document.write('<br> <br>');
             win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
             win.document.write('</body></html>');
             win.document.close(); // CLOSE THE CURRENT WINDOW.
             win.print(); // PRINT THE CONTENTS.
         }
 
-        var canvas = $("#chartContainer .canvasjs-chart-canvas").get(0);
-        var dataURL = canvas.toDataURL();
-        console.log("i:" + dataURL);
-        $("#exportButton").click(function() {
-            var pdf = new jsPDF("lanscape");
-            //pdf.text(35, 25, "Octonyan loves jsPDF");
-            //pdf.fromHTML($("#tab")[0],20,30)
-            pdf.addImage(dataURL, 'PNG', 15, 40, 190, 130);
-            pdf.save("graph.pdf");
-        });
     </script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>
