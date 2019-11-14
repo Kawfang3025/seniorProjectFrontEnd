@@ -10,6 +10,8 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <plugin name="cordova-plugin-file-transfer" spec="1" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <allow-navigation href="*" />
     <allow-intent href="*" />

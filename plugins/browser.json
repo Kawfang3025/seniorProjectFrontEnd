@@ -21,6 +21,9 @@
     },
     "cordova-plugin-local-notification": {
       "PACKAGE_NAME": "com.hanuman.somdai"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
     }
   },
   "dependent_plugins": {
@@ -28,6 +31,9 @@
       "PACKAGE_NAME": "com.hanuman.somdai"
     },
     "cordova-plugin-badge": {
+      "PACKAGE_NAME": "com.hanuman.somdai"
+    },
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.hanuman.somdai"
     }
   }

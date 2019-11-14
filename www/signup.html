@@ -3,11 +3,9 @@
 
 <head>
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>SomDai</title>
 </head>
@@ -33,15 +31,13 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="" class="form-control input_pass" id="password"
-                                placeholder="รหัสผ่าน">
+                            <input type="password" name="" class="form-control input_pass" id="password" placeholder="รหัสผ่าน">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="" class="form-control input_pass" id="cfpassword"
-                                placeholder="ยืนยันรหัสผ่าน">
+                            <input type="password" name="" class="form-control input_pass" id="cfpassword" placeholder="ยืนยันรหัสผ่าน">
                         </div>
                         <hr style="background-color:aliceblue;">
                         <div>
@@ -58,8 +54,7 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                             </div>
-                            <input type="text" name="" class="form-control input_user" id="nickname"
-                                placeholder="ชื่อเล่น">
+                            <input type="text" name="" class="form-control input_user" id="nickname" placeholder="ชื่อเล่น">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
@@ -102,14 +97,13 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                             </div>
-                            <input type="text" name="" class="form-control input_user" id="tel" value=""
-                                placeholder="เบอร์โทร">
+                            <input type="text" name="" class="form-control input_user" id="tel" value="" placeholder="เบอร์โทร">
                         </div>
 
 
                     </form>
                 </div>
-                <div  class="d-flex justify-content-center mt-3 login_container">
+                <div class="d-flex justify-content-center mt-3 login_container">
                     <a name="" onclick="insert();" class="btn login_btn">ลงทะเบียน</a>
                 </div>
                 <div id="buttoncf"></div>
@@ -138,41 +132,32 @@
             var url;
             var xmlhttp = new XMLHttpRequest();
             console.log(department);
-            
+
             if (department == "Engineering") {
-                url = "https://"+IP+":8443/technicains/insert/" + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + ","+password +"," + "";
-                
+                url = "http://" + IP + ":8443/technicains/insert/" + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
+
             } else {
-                url = "https://"+IP+":8443/employees/insert/" + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
+                url = "http://" + IP + ":8443/employees/insert/" + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
             }
             console.log(url);
-            
-            
+
+
             xmlhttp.open("POST", url, false);
             xmlhttp.send();
-            localStorage.setItem("email",e_mail);
+            localStorage.setItem("email", e_mail);
             window.location.href = 'request.html';
         } else {
-            document.getElementById("buttoncf").innerHTML+= '<div class="alert alert-danger alert-dismissible fade show">'+
-            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-            '<strong>รหัสผ่านไม่ตรงกัน!</strong></div>';
-            
+            document.getElementById("buttoncf").innerHTML += '<div class="alert alert-danger alert-dismissible fade show">' +
+                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                '<strong>รหัสผ่านไม่ตรงกัน!</strong></div>';
+
         }
 
     }
-
-
-
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 </html>

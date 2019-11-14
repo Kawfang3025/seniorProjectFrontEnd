@@ -173,7 +173,7 @@
 
         function show() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/employees/employeeID/" + ID;
+            var url = "http://" + IP + ":8443/employees/employeeID/" + ID;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -193,7 +193,7 @@
 
         function showtechnicain() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/technicains/technicainID/" + ID;
+            var url = "http://" + IP + ":8443/technicains/technicainID/" + ID;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -219,10 +219,10 @@
                 console.log(department);
 
                 if (department == "Engineering") {
-                    url = "https://" + IP + ":8443/technicains/update/" + ID + "," + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
+                    url = "http://" + IP + ":8443/technicains/update/" + ID + "," + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
 
                 } else {
-                    url = "https://" + IP + ":8443/employees/update/" + ID + "," + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
+                    url = "http://" + IP + ":8443/employees/update/" + ID + "," + firstName + "," + lastName + "," + nickname + "," + department + "," + positions + "," + telNumber + "," + e_mail + "," + password + "," + "";
                 }
                 console.log(url);
 

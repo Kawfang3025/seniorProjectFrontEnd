@@ -11,7 +11,7 @@
     <title>SomDai</title>
 
     <script>
-        localStorage.setItem("IP", "192.168.1.50");
+        localStorage.setItem("IP", "192.168.1.55"); //172.26.251.142");
         var IP = localStorage.getItem("IP");
         window.onerror = function(msg, url, linenumber) {
             alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber);
@@ -25,7 +25,7 @@
                 window.location.href = 'login.html';
             } else {
                 var xmlhttp = new XMLHttpRequest();
-                var url = "https://" + IP + ":8443/technicains";
+                var url = "http://" + IP + ":8443/technicains";
                 console.log(url)
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
@@ -40,7 +40,7 @@
                     }
                 }
                 var xmlhttp = new XMLHttpRequest();
-                var url1 = "https://" + IP + ":8443/employees";
+                var url1 = "http://" + IP + ":8443/employees";
                 xmlhttp.open("GET", url1, false);
                 xmlhttp.send();
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
