@@ -4,12 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
 
     <title>Take Pictures</title>
@@ -84,11 +87,12 @@
             <p class="pr-3 pl-3"><img src="img/picture.png" alt="image" id="photo" style="width: 100% ;" /></p>
             <p class="center w-100"><button id="btn">Take Picture</button></p>
             <p id="msg" class="text-truncate " style="width: 80% ;"></p>
-            <a name="" id="" class="btn btn-primary " onclick="insertRepair()" role="button">ยืนยัน</a>
+            <a name="" id="" class="btn btn-primary " onclick="uploadFile()" role="button">ยืนยัน</a>
         </div>
     </div>
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script>
+        var file;
         let app = {
             init: function() {
                 document.getElementById('btn').addEventListener('click', app.takephoto);
@@ -110,6 +114,7 @@
             ftw: function(imgURI) {
                 document.getElementById('msg').textContent = imgURI;
                 document.getElementById('photo').src = imgURI;
+                file = imgURI;
                 console.log(imgURI);
 
 
@@ -125,13 +130,71 @@
 
         function uploadFile() {
 
-            var form = document.getElementById('photo');
+            /*var file = document.getElementById('photo');
             var formData = new FormData(form);
             var xhr = new XMLHttpRequest();
+            var IP = localStorage.getItem("IP");
             // Add any event handlers here...
-            var url = "http://localhost:8080/upload";
+            var url = "https://" + IP + ":8443/upload";
             xhr.open('POST', url, true);
-            xhr.send(formData);
+            xhr.send(formData);*/
+
+            /*var IP = localStorage.getItem("IP");
+            var form = new FormData();
+            form.append("file", file);
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://" + IP + ":8443/upload",
+                "method": "POST",
+                "headers": {
+                    "User-Agent": "PostmanRuntime/7.17.1",
+                    "Accept": "",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "0911794b-4dc1-4d22-bfa6-043e891198ab,7dac58e9-84e8-4e96-bcb8-7d4ec43d2236",
+                    "Host": "localhost:8443",
+                    "Content-Type": "multipart/form-data; boundary=--------------------------811382950205030943736088",
+                    "Accept-Encoding": "gzip, deflate",
+                    "Content-Length": "695768",
+                    "Connection": "keep-alive",
+                    "cache-control": "no-cache"
+                },
+                "processData": false,
+                "contentType": "text/plain;charset=UTF-8",
+                "mimeType": "multipart/form-data",
+                "data": form
+            }
+
+            $.ajax(settings).done(function(response) {
+                console.log(response);
+            });*/
+
+            var data = new FormData();
+            data.append("file", "/C:/Users/Chaweewan Sukwan/Desktop/Screenshot_1570995991.png");
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function() {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+
+            xhr.open("POST", "https://localhost:8443/upload");
+            xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.17.1");
+            xhr.setRequestHeader("Accept", "*/*");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "0911794b-4dc1-4d22-bfa6-043e891198ab,25a5313e-dd84-4477-9c0e-bdc126deaafc");
+            xhr.setRequestHeader("Host", "localhost:8443");
+            xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=--------------------------811382950205030943736088");
+            xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
+            xhr.setRequestHeader("Content-Length", "695768");
+            xhr.setRequestHeader("Connection", "keep-alive");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
 
 
         }
@@ -158,10 +221,6 @@
         }
     </script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/sidebar.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
