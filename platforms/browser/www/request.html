@@ -18,7 +18,7 @@
     <title>SomDai</title>
 </head>
 
-<body style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
+<body>
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
@@ -115,7 +115,7 @@
         function checkID() {
             var xmlhttp = new XMLHttpRequest();
             var email = localStorage.getItem("email");
-            var url1 = "https://" + IP + ":8443/technicains";
+            var url1 = "http://" + IP + ":8443/technicains";
             xmlhttp.open("GET", url1, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -129,7 +129,7 @@
                     }
                 }
                 if (ID === '0') {
-                    url2 = "https://" + IP + ":8443/employees";
+                    url2 = "http://" + IP + ":8443/employees";
                     xmlhttp.open("GET", url2, false);
                     xmlhttp.send();
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -154,13 +154,13 @@
             if (department === "Engineering") {
                 if (position === "Supervisor") {
                     pos = "H";
-                    url = "https://" + IP + ":8443/joinemprepair";
+                    url = "http://" + IP + ":8443/joinemprepair";
                 } else {
                     pos = "E";
-                    url = "https://" + IP + ":8443/joinemprepair/technicain/" + ID;
+                    url = "http://" + IP + ":8443/joinemprepair/technicain/" + ID;
                 }
             } else {
-                url = "https://" + IP + ":8443/joinemprepair/employee/" + department;
+                url = "http://" + IP + ":8443/joinemprepair/employee/" + department;
             }
             console.log(url);
             if (pos === "H") {
@@ -261,9 +261,9 @@
             var url;
             if (department === "Engineering") {
                 if (position === "Supervisor") {
-                    url = "https://" + IP + ":8443/repairing/update/statusHead/" + repairID;
+                    url = "http://" + IP + ":8443/repairing/update/statusHead/" + repairID;
                 } else {
-                    url = "https://" + IP + ":8443/repairing/update/statusTech/" + repairID;
+                    url = "http://" + IP + ":8443/repairing/update/statusTech/" + repairID;
                 }
             }
             xmlhttp.open("GET", url, false);

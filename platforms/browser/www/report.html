@@ -16,12 +16,20 @@
     <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script type="text/javascript" src="js/html2canvas.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+<<<<<<< HEAD
     
     <title>SomDai</title>
 </head>
 
 <body
     style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+=======
+
+    <title>SomDai</title>
+</head>
+
+<body>
+>>>>>>> dfba06139aa91158bd79433e7ae52af130237b63
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
@@ -121,7 +129,7 @@
 
         function yearlist() {
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/repairing";
+            var url = "http://" + IP + ":8443/repairing";
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -147,9 +155,9 @@
             var year = document.getElementById('yearShow').value;
             var department = document.getElementById('department').value;
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/countStatusFinish";
+            var url1 = "http://" + IP + ":8443/countStatusFinish";
             if (department !== 'ทุกแผนก') {
-                url1 = "https://" + IP + ":8443/CountStatusFinish/deparment/" + department;
+                url1 = "http://" + IP + ":8443/CountStatusFinish/deparment/" + department;
             }
             xmlhttp.open("GET", url1, false);
             console.log(url1);
@@ -186,9 +194,9 @@
             var year = document.getElementById('yearShow').value;
             department = document.getElementById('department').value;
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/count";
+            var url1 = "http://" + IP + ":8443/count";
             if (department !== 'ทุกแผนก') {
-                url1 = "https://" + IP + ":8443/count/deparment/" + department;
+                url1 = "http://" + IP + ":8443/count/deparment/" + department;
             }
             xmlhttp.open("GET", url1, false);
             console.log(url1);
@@ -346,9 +354,9 @@
             var nov = 0
             var dec = 0
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/repairing";
+            var url = "http://" + IP + ":8443/repairing";
             if (department !== 'ทุกแผนก') {
-                url = "https://" + IP + ":8443/repairing/department/" + department;
+                url = "http://" + IP + ":8443/repairing/department/" + department;
             }
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
@@ -364,7 +372,7 @@
                 }
             }
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/employees";
+            var url1 = "http://" + IP + ":8443/employees";
             xmlhttp.open("GET", url1, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -379,7 +387,7 @@
                 }
             }
             var xmlhttp = new XMLHttpRequest();
-            var url2 = "https://" + IP + ":8443/technicains";
+            var url2 = "http://" + IP + ":8443/technicains";
             xmlhttp.open("GET", url2, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -541,7 +549,10 @@
             win.document.close(); // CLOSE THE CURRENT WINDOW.
             win.print(); // PRINT THE CONTENTS.
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dfba06139aa91158bd79433e7ae52af130237b63
     </script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/sidebar.js"></script>

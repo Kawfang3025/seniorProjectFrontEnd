@@ -12,7 +12,7 @@
     <title>SomDai</title>
 </head>
 
-<body style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+<body>
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
@@ -99,7 +99,7 @@
         var empID = localStorage.getItem('empID');
         var xmlhttp = new XMLHttpRequest();
         var IP = localStorage.getItem("IP");
-        var url = "https://" + IP + ":8443/joinemprepair";
+        var url = "http://" + IP + ":8443/joinemprepair";
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -122,7 +122,7 @@
 
 
         var xmlhttp = new XMLHttpRequest();
-        var url = "https://" + IP + ":8443/technicains";
+        var url = "http://" + IP + ":8443/technicains";
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -135,7 +135,7 @@
             }
         }
         var xmlhttp = new XMLHttpRequest();
-        var url1 = "https://" + IP + ":8443/repairing/repairingID/" + localStorage.getItem('repairID');
+        var url1 = "http://" + IP + ":8443/repairing/repairingID/" + localStorage.getItem('repairID');
         xmlhttp.open("GET", url1, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -144,7 +144,7 @@
             if (jsoutput[0].technicainID !== "") {
                 var technicain = jsoutput[0].technicainID;
                 var xmlhttp = new XMLHttpRequest();
-                var url2 = "https://" + IP + ":8443/technicains/technicainID/" + technicain;
+                var url2 = "http://" + IP + ":8443/technicains/technicainID/" + technicain;
                 xmlhttp.open("GET", url2, false);
                 xmlhttp.send();
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -154,7 +154,7 @@
                 }
             }
             var xmlhttp = new XMLHttpRequest();
-            var url1 = "https://" + IP + ":8443/repairing/repairingID/" + localStorage.getItem('repairID');
+            var url1 = "http://" + IP + ":8443/repairing/repairingID/" + localStorage.getItem('repairID');
             xmlhttp.open("GET", url1, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -183,14 +183,14 @@
         function confirm() {
             var choosingT = document.getElementById('task').value;
             console.log(choosingT);
-
+            var dateTech = new Date(year, month, day, hours, minutes, seconds)
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/repairing/update/technicainID/" + localStorage.getItem('repairID') + "," + choosingT;
+            var url = "http://" + IP + ":8443/repairing/update/technicainID/" + localStorage.getItem('repairID') + "," + choosingT + "," + ;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
 
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/technicains/technicainID/" + choosingT;
+            var url = "http://" + IP + ":8443/technicains/technicainID/" + choosingT;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -212,7 +212,7 @@
             console.log(dateRP);
 
             var xmlhttp = new XMLHttpRequest();
-            var url = "https://" + IP + ":8443/repairing/update/dateRP/" + localStorage.getItem('repairID') + "," + dateRP;
+            var url = "http://" + IP + ":8443/repairing/update/dateRP/" + localStorage.getItem('repairID') + "," + dateRP;
             xmlhttp.open("GET", url, false);
             xmlhttp.send();
             window.location.href = 'requestdetail.html'

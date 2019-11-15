@@ -62,3 +62,17 @@
 .hamburger-icon span:last-child {
     margin-bottom:0px;
 }
+
+.nav-tabs > li {
+  float:none;
+  display:inline-block;
+  zoom:1;
+}
+
+.nav-tabs {
+  text-align:center;
+}
+
+.border{
+  background-color: rgba(255, 255, 204, 0.863);
+}

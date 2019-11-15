@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" onclick="notice()">notification</button>
+    <script>
+        var IP = localStorage.getItem("IP");
+
+        setInterval(function() {
+            document.addEventListener('deviceready', function() {
+                // window.plugin.notification.local is now available
+            }, false);
+            var d = new Date;
+            d.setMinutes(d.getMinutes() - 1);
+            d.setSeconds(00),
+                dformat = [d.getFullYear(),
+                    d.getMonth() + 1,
+                    d.getDate()
+                ].join('-') + ' ' + [d.getHours(),
+                    (d.getMinutes() < 10 ? '0' : '') + d.getMinutes(),
+                    (d.getSeconds() < 10 ? '0' : '') + d.getSeconds()
+                ].join(':');
+            console.log(dformat);
+
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://" + IP + ":8443/repairing/" + dformat;
+            xmlhttp.open("GET", url, false);
+            xmlhttp.send();
+            console.log('ready');
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var output = xmlhttp.responseText;
+                var jsoutput = JSON.parse(output);
+                for (let i = 0; i < jsoutput.length; i++) {
+                    cordova.plugins.notification.local.schedule({
+                        title: jsoutput[i].repairingID,
+                        text: jsoutput[i].detail,
+                        foreground: true
+                    });
+                    console.log('alert');
+                }
+            }
+        }, 1000 * 60 * 0.5);
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="cordova.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
