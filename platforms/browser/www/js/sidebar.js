@@ -28,7 +28,7 @@ if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         }
     }
     if (ID === 0) {
-        url2 = "https://" + IP + ":8443/employees";
+        url2 = "http://" + IP + ":8443/employees";
         xmlhttp.open("GET", url2, false);
         xmlhttp.send();
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
