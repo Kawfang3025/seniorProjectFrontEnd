@@ -38,7 +38,7 @@
     </style>
 </head>
 
-<body style="background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% );">
+<body>
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
@@ -75,6 +75,7 @@
             <a href="newRequest.html">แจ้งซ่อม</a>
             <a href="report.html">รายงานการแจ้งซ่อม</a>
             <a href="editproflie.html">แก้ไขข้อมูลส่วนตัว</a>
+            <a href="about.html">ทีมผู้พัฒนา</a>
             <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
 
@@ -85,14 +86,14 @@
                 <textarea class="form-control" id="detail" rows="3"></textarea>
             </div>
             <p class="pr-3 pl-3"><img src="img/picture.png" alt="image" id="photo" style="width: 100% ;" /></p>
-            <form id="singleUploadForm" name="singleUploadForm">
+            <!-- <form id="singleUploadForm" name="singleUploadForm">
                 <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
                 <button type="submit" class="primary submit-btn">Submit</button>
             </form>
             <div class="upload-response">
                 <div id="singleFileUploadError"></div>
                 <div id="singleFileUploadSuccess"></div>
-            </div>
+            </div> -->
             <p class="center w-100"><button id="btn">Take Picture</button></p>
             <p id="msg" class="text-truncate " style="width: 80% ;"></p>
             <a name="" id="" class="btn btn-primary " onclick="insertRepair()" role="button">ยืนยัน</a>

@@ -18,7 +18,7 @@
     <title>SomDai</title>
 </head>
 
-<body style="height:auto;background-image: radial-gradient( circle farthest-corner at 1.8% 0%,  rgba(255,255,255,1) 37.6%, #bbb 90% ); ">
+<body>
     <div class="bs-example">
         <nav class="navbar bg-dark  navbar-dark fixed-top" style="background-color: rgb(10, 6, 43)">
             <!-- Toggler/collapsibe Button -->
@@ -55,6 +55,7 @@
             <a href="newRequest.html">แจ้งซ่อม</a>
             <a href="report.html">รายงานการแจ้งซ่อม</a>
             <a href="editproflie.html">แก้ไขข้อมูลส่วนตัว</a>
+            <a href="about.html">ทีมผู้พัฒนา</a>
             <a href="javascript:logout();">ออกจากระบบ</a>
         </div>
         <div class="container mt-5">
@@ -105,19 +106,19 @@
                             <span class="input-group-text"><i class="fas fa-user-graduate"></i></span>
                         </div>
                         <select class="form-control " id="department" style="width: 87%">
-                        <option>แผนก</option>
-                        <option value="Sale and Marketing">Sale and Marketing</option>
-                        <option value="Accounting">Accounting</option>
-                        <option value="Purchased">Purchased</option>
-                        <option value="Operation">Operation</option>
-                        <option value="Guide">Guide</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Receptions">Receptions</option>
-                        <option value="Reservation">Reservation</option>
-                        <option value="Food and Beverage">Food and Beverage</option>
-                        <option value="Drivers">Drivers</option>
-                        <option value="Human Resources">Human Resources</option>
-                    </select>
+                            <option>แผนก</option>
+                            <option value="Sale and Marketing">Sale and Marketing</option>
+                            <option value="Accounting">Accounting</option>
+                            <option value="Purchased">Purchased</option>
+                            <option value="Operation">Operation</option>
+                            <option value="Guide">Guide</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Receptions">Receptions</option>
+                            <option value="Reservation">Reservation</option>
+                            <option value="Food and Beverage">Food and Beverage</option>
+                            <option value="Drivers">Drivers</option>
+                            <option value="Human Resources">Human Resources</option>
+                        </select>
 
                     </div>
                     <div class="input-group mb-2">
@@ -125,17 +126,17 @@
                             <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                         </div>
                         <select class="form-control " id="position" style="width: 85%">
-                        <option>ตำแหน่ง</option>
-                        <option value="President(CEO)">President(CEO)</option>
-                        <option value="Vice-president">Vice-president</option>
-                        <option value="Managing Director">Managing Director</option>
-                        <option value="General Manager(GM)">General Manager(GM)</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Assistant Manager">Assistant Manager</option>
-                        <option value="Supervisor">Supervisor</option>
-                        <option value="Officer">Officer</option>
-                        <option value="Technicain">Technicain</option>
-                    </select>
+                            <option>ตำแหน่ง</option>
+                            <option value="President(CEO)">President(CEO)</option>
+                            <option value="Vice-president">Vice-president</option>
+                            <option value="Managing Director">Managing Director</option>
+                            <option value="General Manager(GM)">General Manager(GM)</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Assistant Manager">Assistant Manager</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Officer">Officer</option>
+                            <option value="Technicain">Technicain</option>
+                        </select>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
@@ -156,15 +157,15 @@
     <script>
         var IP = localStorage.getItem("IP");
         var ID = localStorage.getItem("ID");
-        var dep = localStorage.getItem("department");
-        var e_mail = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
-        var firstName = document.getElementById("firstname").value;
-        var lastName = document.getElementById("lastname").value;
-        var nickname = document.getElementById("nickname").value;
-        var department = document.getElementById("department").value;
-        var positions = document.getElementById("position").value;
-        var telNumber = document.getElementById("tel").value;
+        var dep = localStorage.getItem("department");;
+        var e_mail;
+        var password;
+        var firstName;
+        var lastName;
+        var nickname;
+        var department;
+        var positions;
+        var telNumber;
         if (dep === "Engineering") {
             showtechnicain()
         } else {
@@ -179,16 +180,25 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var output = xmlhttp.responseText;
                 var jsoutput = JSON.parse(output);
-                document.getElementById('email').value = jsoutput[0].e_mail
-                document.getElementById('password').value = jsoutput[0].password
-                document.getElementById('firstname').value = jsoutput[0].firstName
-                document.getElementById('lastname').value = jsoutput[0].lastName
-                document.getElementById('nickname').value = jsoutput[0].nickname
-                document.getElementById('department').value = jsoutput[0].department
-                document.getElementById('position').value = jsoutput[0].positions
-                document.getElementById('tel').value = jsoutput[0].telNumber
+                e_mail = jsoutput[0].e_mail;
+                password = jsoutput[0].password;
+                firstName = jsoutput[0].firstName;
+                lastName = jsoutput[0].lastName;
+                nickname = jsoutput[0].nickname;
+                department = jsoutput[0].department;
+                positions = jsoutput[0].positions;
+                telNumber = jsoutput[0].telNumber;
+
                 console.log(jsoutput[0].firstName)
             }
+            document.getElementById('email').value = e_mail
+            document.getElementById('password').value = password
+            document.getElementById('firstname').value = firstName
+            document.getElementById('lastname').value = lastName
+            document.getElementById('nickname').value = nickname
+            document.getElementById('department').value = department
+            document.getElementById('position').value = positions
+            document.getElementById('tel').value = telNumber
         }
 
         function showtechnicain() {
@@ -199,19 +209,37 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var output = xmlhttp.responseText;
                 var jsoutput = JSON.parse(output);
-                document.getElementById('email').value = jsoutput[0].e_mail
-                document.getElementById('password').value = jsoutput[0].password
-                document.getElementById('firstname').value = jsoutput[0].firstName
-                document.getElementById('lastname').value = jsoutput[0].lastName
-                document.getElementById('nickname').value = jsoutput[0].nickname
-                document.getElementById('department').value = jsoutput[0].department
-                document.getElementById('position').value = jsoutput[0].positions
-                document.getElementById('tel').value = jsoutput[0].telNumber
+                e_mail = jsoutput[0].e_mail;
+                password = jsoutput[0].password;
+                firstName = jsoutput[0].firstName;
+                lastName = jsoutput[0].lastName;
+                nickname = jsoutput[0].nickname;
+                department = jsoutput[0].department;
+                positions = jsoutput[0].positions;
+                telNumber = jsoutput[0].telNumber;
+
                 console.log(jsoutput[0].firstName)
             }
+            document.getElementById('email').value = e_mail
+            document.getElementById('password').value = password
+            document.getElementById('firstname').value = firstName
+            document.getElementById('lastname').value = lastName
+            document.getElementById('nickname').value = nickname
+            document.getElementById('department').value = department
+            document.getElementById('position').value = positions
+            document.getElementById('tel').value = telNumber
         }
 
         function update() {
+            dep = localStorage.getItem("department");
+            e_mail = document.getElementById("email").value;
+            password = document.getElementById("password").value;
+            firstName = document.getElementById("firstname").value;
+            lastName = document.getElementById("lastname").value;
+            nickname = document.getElementById("nickname").value;
+            department = document.getElementById("department").value;
+            positions = document.getElementById("position").value;
+            telNumber = document.getElementById("tel").value;
 
             if (document.getElementById("password").value === document.getElementById("cfpassword").value) {
                 var url;
@@ -229,6 +257,7 @@
 
                 xmlhttp.open("GET", url, false);
                 xmlhttp.send();
+                window.location.href = 'request.html';
             } else {
                 document.getElementById("buttoncf").innerHTML += '<div class="alert alert-danger alert-dismissible fade show">' +
                     '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
