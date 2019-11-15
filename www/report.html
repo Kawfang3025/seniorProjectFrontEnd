@@ -4,9 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bai+Jamjuree&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/sidebar.css">
@@ -25,9 +27,9 @@
             <a id="main" class="m-0" style="color: rgb(255, 255, 255);height: 100%;width: 50%">
                 <span style="cursor:pointer" onclick="openNav()"><label class="hamburger-icon">
                         <span>&nbsp;</span>
-                <span>&nbsp;</span>
-                <span>&nbsp;</span>
-                </label>
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                    </label>
                 </span>
             </a>
 
@@ -77,10 +79,13 @@
                 </select>
                 <select class="form-control " id="yearShow" style="width: 87%">
                 </select>
-                <a name="" id="" class="btn btn-primary " onclick="finishdata()+table()" role="button">ยืนยัน</a>
-                <p>
-                    <button id="" type="button" onclick="createPDF()">Export as PDF</button>
-                </p>
+                <br>
+                    </center>
+                        <a name="" id="" class="btn btn-primary" onclick="finishdata()+table()" role="button">ยืนยัน</a>
+                   
+                        <a name="" id="" class="btn btn-danger" onclick="createPDF()" role="button">Export as PDF</a>
+                    </center>
+                
             </div>
             <div id="chartContainer" style="height: 360px; width: 100%;"></div>
             <br><br>
@@ -131,7 +136,7 @@
                 year = [...new Set(year)];
             }
             for (let i = 0; i < year.length; i++) {
-                year.sort(function(a, b) {
+                year.sort(function (a, b) {
                     return b - a
                 });
                 document.getElementById('yearShow').innerHTML += '<option value="' + year[i] + '">' + year[i] + '</option>`';
@@ -523,6 +528,12 @@
             style = style + "table {width: 100%;font: 17px Calibri;}";
             style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
             style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "img {"
+            style = style + "border: 1px solid #ddd;"
+            style = style + "border-radius: 4px;"
+            style = style + "padding: 5px;"
+            style = style + "width: 100%;"
+            style = style + "}"
             style = style + "</style>";
             // CREATE A WINDOW OBJECT.
             var win = window.open('', '', 'height=700,width=700');
