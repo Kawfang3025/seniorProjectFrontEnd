@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@ionic-native/http": "^5.13.0",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "cordova": "^9.0.0",
     "cordova-android": "^8.0.0",
     "cordova-browser": "^6.0.0",
